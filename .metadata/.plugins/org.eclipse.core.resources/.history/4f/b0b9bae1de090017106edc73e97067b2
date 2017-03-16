@@ -35,7 +35,7 @@ public class Switch {
 			break;
 		}
 		
-		System.out.println("Classificación: "+juicio);
+		System.out.println("Classificación: "+classificacion);
 	}
 
 }
