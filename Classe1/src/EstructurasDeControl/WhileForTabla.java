@@ -16,6 +16,7 @@ public class WhileForTabla {
 			System.out.println(x+" x " +tabla+ " = "+(x*tabla));
 			x++;
 		}
+		variable.close();
 	}
 
 }
