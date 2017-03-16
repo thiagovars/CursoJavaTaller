@@ -1,0 +1,22 @@
+package EstructurasDeControl;
+
+public class If {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		double num1 = 1;
+		if (num1 > 0) {
+			System.out.println("Numero positivo");
+		} else if (num1 < 0) {
+			System.out.println("Numero negativo!");
+		} else if ((num1%2) == 0) {
+			System.out.println("Numero es par!");
+		} else {
+			System.out.println("Numero es impar!");
+		}
+	}
+
+}
