@@ -7,8 +7,8 @@ public class Switch {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int nota = 4;
-		String classificacion = "";
+		int nota = 5;
+		String classificacion;
 		
 		switch (nota) {
 		case 0:
@@ -34,8 +34,6 @@ public class Switch {
 			} 
 			break;
 		}
-		
-		System.out.println("Classificación: "+classificacion);
 	}
 
 }
