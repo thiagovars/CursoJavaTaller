@@ -44,6 +44,26 @@ public class Usuario {
 							", tengo "+
 							this.getEdad()+
 							" años y vivo en "+
-							this.getDireccion());
+							this.getDireccion()+
+							" vos tenés apellido? "+this.dizApellido());
+	}
+	
+	public Boolean tieneApellido() {
+		String apellido = this.getApellido();
+		if (apellido == null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public String dizApellido() {
+		String apellidoReturn;
+		if (this.tieneApellido()) {
+			apellidoReturn = "Mi apellido es " + this.getApellido();
+		} else {
+			apellidoReturn= "No, no tengo apellido";
+		}
+		return apellidoReturn;
 	}
 }
