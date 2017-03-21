@@ -1,0 +1,18 @@
+package EjercicioJAVA1;
+import java.util.Scanner;
+
+
+public class createLogin {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		int clave = scanner.nextInt();
+		System.out.println("clave: "+clave);
+		scanner.close();
+	}
+
+}

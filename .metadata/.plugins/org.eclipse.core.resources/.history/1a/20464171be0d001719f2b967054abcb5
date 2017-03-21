@@ -1,0 +1,29 @@
+package EjercicioJAVA1;
+
+public class Persona {
+	private Double Peso;
+	private Double altura; //en centímetros
+	
+	public Persona(int peso, int altura) {
+		super();
+		this.Peso = peso;
+		this.altura = altura;
+	}
+
+	public int getPeso() {
+		return Peso;
+	}
+
+	public void setPeso(int peso) {
+		Peso = peso;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+	
+}

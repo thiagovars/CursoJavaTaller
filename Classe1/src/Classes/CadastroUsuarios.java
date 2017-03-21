@@ -17,7 +17,7 @@ public class CadastroUsuarios {
 		usuario1.quienSos();
 		if (!usuario1.tieneApellido()) {
 			Scanner handler = new Scanner(System.in);
-			System.out.println("usuario no tiene apellido ordenado");
+			System.out.println("usuario no tiene apellido registrado");
 			String apellido = handler.next();
 			usuario1.setApellido(apellido);
 			handler.close();

@@ -1,0 +1,24 @@
+package EjercicioJAVA1;
+
+public class Menu {
+	public static void showMenu(String menu) {
+		switch(menu) {
+		case "desayuno":
+			break;
+		case "almuerzo":
+			System.out.println("El menu para almuerzo:");
+			System.out.println("- Media pizza");
+			System.out.println("- Pizza y fainá");
+			System.out.println("- Chivito canadense");
+			System.out.println("- Chivito al plato");
+			System.out.println("- Pasta con tuco");
+			break;
+		case "merienda":
+			break;
+		case "cena":
+			break;
+		default:
+			break;
+		}
+	}
+}

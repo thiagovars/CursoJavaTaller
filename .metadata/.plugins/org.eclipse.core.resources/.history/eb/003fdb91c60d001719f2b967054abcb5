@@ -1,0 +1,7 @@
+package EjercicioJAVA1;
+
+public class Menu {
+	public static void showMenu(String menu) {
+		
+	}
+}

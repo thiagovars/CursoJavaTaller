@@ -1,0 +1,20 @@
+package EjercicioJAVA1;
+import java.util.Scanner;
+
+
+public class createLogin {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		String login;
+		System.out.println("ingrese con la clave: ");
+		int clave = scanner.nextInt();
+		
+		scanner.close();
+	}
+
+}

@@ -1,0 +1,11 @@
+package EjercicioJAVA1;
+
+public class ImcCalc {
+	Persona persona;
+	
+	public Double ImcCalc(Persona persona) {
+		Double altura = persona.getAltura();
+		Double peso = persona.getPeso();
+		return (peso/altura^2);
+	}
+}

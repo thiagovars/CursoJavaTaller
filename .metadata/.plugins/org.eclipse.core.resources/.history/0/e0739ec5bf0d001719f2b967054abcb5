@@ -1,0 +1,17 @@
+package EjercicioJAVA1;
+import java.util.Scanner;
+
+public class PersonaIMC {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		Persona p = new Persona();
+		
+		
+	}
+
+}
