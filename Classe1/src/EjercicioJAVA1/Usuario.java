@@ -22,5 +22,13 @@ public class Usuario {
 		this.clave = clave;		
 	}
 	
-	
+	public void loginUser(String login, int clave) {
+		String usr = this.getLogin();
+		
+		if (login.equals(usr) && clave == this.getClave()) {
+			System.out.println("Bien venido " + this.getLogin());
+		} else {
+			System.out.println("usuario no encontrado.");
+		}
+	}
 }
