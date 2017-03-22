@@ -1,0 +1,22 @@
+package EjercicioJAVA1;
+import java.util.Scanner;
+
+public class ContaPersonas {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("ingrese el numero de mujeres: ");
+		int mujeres = scanner.nextInt();
+		
+		System.out.println("ingrese el numero de hombres: ");
+		int hombres = scanner.nextInt();
+		
+		scanner.close();
+	}
+
+}
