@@ -1,0 +1,14 @@
+package EjercicioJAVA2;
+
+public class Ejercicio1 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int arr[] = new int[10];
+		String defArr[] = new String[10];
+	}
+
+}

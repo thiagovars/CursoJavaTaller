@@ -57,7 +57,7 @@ public class EstruturaArray {
 		
 		for (i=0; multi.length > i; i++) {
 			for (j=0; multi[i].length > j; j++) {
-				System.out.println("elemento multi["+i+"]"+multi[i][j]);
+				System.out.println("elemento "+multi[i][j]);
 			}
 		}
 	}
