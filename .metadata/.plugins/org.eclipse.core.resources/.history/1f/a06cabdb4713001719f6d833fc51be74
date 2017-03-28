@@ -1,0 +1,11 @@
+package Classes;
+import java.util.Scanner;
+
+public class Produtos {
+	private double suma;
+	
+	public void ingresarProductos() {
+		double sum;
+		
+	}
+}

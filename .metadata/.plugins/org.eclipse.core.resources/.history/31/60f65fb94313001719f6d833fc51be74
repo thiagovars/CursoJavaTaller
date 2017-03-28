@@ -1,0 +1,83 @@
+package Classes;
+import java.util.Scanner;
+
+public class Persona {
+	private String nombre;
+	private double altura; // altura en centìmetros
+	private int peso;
+	private Scanner scn = new Scanner(System.in);
+	
+	public Persona() {
+		if (nombre.equals("")) {
+			System.out.println("hay que ingresar el nombre de la persona");
+		} else {
+			this.nombre = this.getNombre();
+		}
+		
+		if (altura > 0) {
+			this.altura = altura;			
+		} else {
+			System.out.println("la altura de la persona no puede ser cero!");
+		}
+	}
+	
+	public void getImc() {
+		double imc = peso/(altura*altura);
+		System.out.println("imc : "+imc);
+		if (imc < 18.49) {
+			System.out.println("Infrapeso");
+		} else if (imc > 18.50 && imc < 24.99) {
+			System.out.println("Peso normal");
+		} else if (imc > 25.0 && imc < 29.99) {
+			System.out.println("Sobrepeso");
+		} else if (imc > 30.0) {
+			System.out.println("Obeso");
+		}
+	}
+	
+	public void show() {
+		System.out.println("Nombre: "+nombre);
+		System.out.println("Altura: "+altura);
+		System.out.println("Peso: "+peso);
+		System.out.print("Imc: ");
+		this.getImc();
+	}
+
+	private String getNombre() {
+		if (this.nombre.equals("")) {
+			String nombre = scn.next();
+			this.setNombre(nombre);
+		}
+		return this.nombre;
+	}
+
+	private void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	private double getAltura() {
+		if (this.altura < 0) {
+			double altura = scn.nextDouble();
+			this.setAltura(altura);
+		}
+		return this.altura;
+	}
+
+	private void setAltura(double altura) {
+		this.altura = altura;
+	}
+
+	private int getPeso() {
+		if (this.peso < 0) {
+			int altura = scn.nextInt();
+			this.setPeso(peso);
+		}
+		return this.peso;
+	}
+
+	private void setPeso(int peso) {
+		this.peso = peso;
+	}
+	
+	
+}

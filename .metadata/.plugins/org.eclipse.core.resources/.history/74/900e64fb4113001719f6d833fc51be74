@@ -1,0 +1,38 @@
+package Classes;
+
+public class Persona {
+	private String nombre;
+	private int altura; // altura en centìmetros
+	private int peso;
+	private int imc;
+	
+	public Persona(String nombre, int altura) {
+		if (nombre.equals("")) {
+			System.out.println("hay que ingresar el nombre de la persona");
+		} else {
+			this.nombre = nombre;
+		}
+		
+		if (altura > 0) {
+			this.altura = altura;			
+		} else {
+			System.out.println("la altura de la persona no puede ser cero!");
+		}
+	}
+	
+	public void calcularImc() {
+		int imc = peso/(altura*altura);
+		System.out.println("imc : "+imc);
+		if (imc < 18.49) {
+			System.out.println("Infrapeso");
+		} else if (imc > 18.50 && imc < 24.99) {
+			System.out.println("Peso normal");
+		} else if (imc > 25.0 && imc < 29.99) {
+			System.out.println("Sobrepeso");
+		} else if (imc > 30.0) {
+			System.out.println("Obeso");
+		}
+	}
+	
+	
+}

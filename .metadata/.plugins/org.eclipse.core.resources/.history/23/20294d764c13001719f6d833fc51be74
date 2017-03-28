@@ -1,0 +1,23 @@
+package Classes;
+
+public class Triangulo {
+	private int A;
+	private int B;
+	private int C;
+	
+	public Triangulo(int a, int b, int c) {
+		this.A = a;
+		this.B = b;
+		this.C = c;
+	}
+	
+	public int calculaLadoMayor() {
+		int mayor = A;//7 8 9
+		if (B > A) {
+			mayor = B;
+		} else if (C > A) {
+			mayor = C;
+		}
+		return mayor;
+	}
+}

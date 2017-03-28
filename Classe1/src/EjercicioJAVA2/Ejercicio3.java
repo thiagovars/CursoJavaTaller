@@ -21,7 +21,7 @@ public class Ejercicio3 {
 		int somAlturas = 0;
 		int i;
 		for (i=0; i < numeroPersonas; i++) {
-			alturas[i] = (int)(Math.random()*210+135);
+			alturas[i] = (int)(Math.random()*165+135);
 			somAlturas = somAlturas + alturas[i];
 		}
 		
