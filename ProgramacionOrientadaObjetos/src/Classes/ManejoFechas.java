@@ -1,6 +1,6 @@
 package Classes;
 //Importa la librería completa
-import java.util.*;
+import java.util.Calendar;
 
 public class ManejoFechas {
 	
@@ -22,11 +22,17 @@ public class ManejoFechas {
 		return cal.get(Calendar.DATE);
 	}
 	
+	static int getDayWeek() {
+		DateFormat.getDateInstance().format(myDate);
+		return cal.get(Calendar.DAY_OF_WEEK);
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(getYear());
 		System.out.println(getMonth());
 		System.out.println(getDate());
 		System.out.println(getYear()+"/"+getMonth()+"/"+getDate());
+		System.out.println(getDayWeek());
 	}
 	
 }

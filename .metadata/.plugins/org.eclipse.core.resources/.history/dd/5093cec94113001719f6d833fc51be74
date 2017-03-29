@@ -1,6 +1,0 @@
-package Classes;
-
-public class Persona {
-	private String nombre;
-	private int imc;
-}
