@@ -23,7 +23,7 @@ public class ManejoFechas {
 	}
 	
 	static int getDayWeek() {
-		DateFormat.getDateInstance().format(myDate);
+		//DateFormat.getDateInstance().format(myDate);
 		return cal.get(Calendar.DAY_OF_WEEK);
 	}
 	
