@@ -1,0 +1,49 @@
+package Fechas;
+import java.util.Calendar;
+import java.util.Scanner;
+
+public class FechaOperador {	
+	static Calendar calendar;
+	private int year;
+	private int month;
+	private int day;
+	
+	
+	public FechaOperador() {
+		calendar = Calendar.getInstance();
+		
+	}
+	
+	//Obtengo el año del sistema
+	static int getYear(){
+		return calendar.get(Calendar.YEAR);
+	}
+	
+	//Obtengo el mes del sistema
+	static int getMonth(){
+		return calendar.get(Calendar.MONTH)+1;
+	}
+	
+	public int returnEdad() {
+		int edad = getYear()-year;		
+		if (getMonth() < month) {
+			edad--;
+		}
+		return edad;
+	}
+	
+	public void catchFechaNavidad() {
+		Scanner scn = new Scanner(System.in);
+		this.year  = 0;
+		this.day   = 0;
+		this.month = 0;
+		System.out.println("ingrese la fecha de navidad (dd/mm/yyyy):");
+		String fecha = scn.next();
+		this.day = Integer.valueOf(fecha.substring(0, 1));
+		this.month = Integer.valueOf(fecha.substring(2, 4));
+		this.year = Integer.valueOf(fecha.substring(5));
+		System.out.println(this.year+"."+this.month+"."+this.year);
+		
+		
+	}
+}

@@ -1,0 +1,21 @@
+package Fechas;
+import java.util.Scanner;
+import java.util.Calendar;
+
+public class Fechas {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		FechaOperador fecha = new FechaOperador();
+		System.out.println(fecha.getYear());
+	}
+	
+	//Obtengo el mes del sistema
+	static int getMonth(){
+		return cal.get(Calendar.MONTH)+1;
+	}
+
+}

@@ -1,0 +1,24 @@
+package CedulaValida;
+
+public class Cedula {
+	static final int validador[] = {2, 9, 8, 7, 6, 3, 4};
+	private int numeroValidador;
+	
+	private void validaCedula() {
+		//440382-9
+		String teste = "4403829"; 
+	}
+	
+	private int getDigito(String cadena) {
+		return Integer.parseInt(cadena.substring(6));
+	}
+	
+	private int proximoNumeroValida() {
+		if (numeroValidador % 10 == 0) {
+			return numeroValidador;
+		} else {
+			this.numeroValidador++;
+			return proximoNumeroValida();
+		}
+	}
+}
