@@ -1,7 +1,0 @@
-package Classes;
-
-public class Triangulo {
-	private int A;
-	private int B;
-	private int C;
-}
