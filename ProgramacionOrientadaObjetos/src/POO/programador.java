@@ -1,12 +1,11 @@
 package POO;
 
 public class programador extends empleado {
-	private empleado empleado;
 	private int lineasDeCodigoPorHora;
 	private String lenguajeDominante;
 	
-	public programador(empleado empleado, int lineasDeCodigoPorHora, String lenguajeDominante) {
-		this.empleado = empleado;
+	public programador(String nombre, String apellido, String cedula, int edad, boolean casado, double salario, int lineasDeCodigoPorHora, String lenguajeDominante) {
+		super(nombre, apellido, cedula, edad, casado, salario);
 		this.lineasDeCodigoPorHora = lineasDeCodigoPorHora;
 		this.lenguajeDominante = lenguajeDominante;
 	}
