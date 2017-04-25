@@ -9,4 +9,20 @@ public class programador extends empleado {
 		this.lineasDeCodigoPorHora = lineasDeCodigoPorHora;
 		this.lenguajeDominante = lenguajeDominante;
 	}
+
+	private int getLineasDeCodigoPorHora() {
+		return lineasDeCodigoPorHora;
+	}
+
+	private void setLineasDeCodigoPorHora(int lineasDeCodigoPorHora) {
+		this.lineasDeCodigoPorHora = lineasDeCodigoPorHora;
+	}
+
+	private String getLenguajeDominante() {
+		return lenguajeDominante;
+	}
+
+	private void setLenguajeDominante(String lenguajeDominante) {
+		this.lenguajeDominante = lenguajeDominante;
+	}
 }

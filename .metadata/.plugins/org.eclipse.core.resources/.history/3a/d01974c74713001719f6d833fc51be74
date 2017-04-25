@@ -1,5 +1,0 @@
-package Classes;
-
-public class Produtos {
-	private double suma;
-}
