@@ -9,7 +9,14 @@ public class empleado {
 	private boolean casado;
 	private double salario;
 	
-	public empleado() {}
+	public empleado(String nombre, String apellido, String cedula, int edad, boolean casado, double salario) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.cedula = cedula;
+		this.edad = edad;
+		this.casado = casado;
+		this.salario = salario;
+	}
 	
 	public String clasificacion() {
 		if	(this.edad >= 21) {
