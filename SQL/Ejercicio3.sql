@@ -75,3 +75,4 @@ INSERT INTO peliculas (nombre, calificacion) VALUES
 
 UPDATE peliculas SET calificacion = "no recomendable" WHERE calificacion = 13;
 
+DELETE FROM salas WHERE codpelicula IN (SELECT codigo FROM peliculas WHERE calificacion = "");
