@@ -1,4 +1,4 @@
-CREATE DATABASE personal;
+CREATE DATABASE BRA_personal;
 
 USE personal;
 
@@ -47,7 +47,7 @@ SELECT emp.clave, emp.nombre, emp.apellido, dep.nombre FROM empleado emp
 
 SELECT emp.clave, emp.nombre, emp.apellido, dep.nombre FROM empleado emp
 	INNER JOIN departamento dep ON emp.departamento = dep.clave
-	WHERE emp.apellido IN ("Lopez", "Perez");
+	WHERE emp.apellido = "Lopez" OR emp.apellido = "Perez";
 
 SELECT emp.nombre, emp.clave FROM departamento dep
 	INNER JOIN empleado emp ON emp.departamento = dep.clave
@@ -68,5 +68,4 @@ SELECT emp.clave, emp.nombre, emp.apellido FROM departamento dep
 	INNER JOIN empleado emp ON emp.departamento = dep.clave
 	WHERE dep.nombre = "Contabilidad";
 
-SELECT emp.clave, emp.nombre, emp.apellido, dep.nombre AS departamento FROM empleado emp
-	INNER JOIN departamento dep ON emp.departamento = dep.clave;
+SELECT emp.clave, emp.nombre, emp.apellido, dep.nombre AS departamento FROM empleado AS emp, departamento AS dep;

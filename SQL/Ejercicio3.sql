@@ -1,6 +1,6 @@
-CREATE DATABASE cine;
+CREATE DATABASE BRA_cine;
 
-USE cine;
+USE BRA_cine;
 
 CREATE TABLE peliculas (
 	codigo int(10) not null primary key AUTO_INCREMENT,

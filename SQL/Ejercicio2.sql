@@ -1,8 +1,8 @@
-CREATE DATABASE tienda;
+CREATE DATABASE BRA_tienda;
 
 SHOW DATABASES;
 
-USE tienda;
+USE BRA_tienda;
 
 CREATE TABLE fabricantes (
 	clave_fabricante int(5) not null primary key,
