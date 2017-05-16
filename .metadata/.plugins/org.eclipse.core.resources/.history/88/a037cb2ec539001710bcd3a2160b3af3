@@ -1,0 +1,100 @@
+package Graf;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class ImcJPanel extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtAltura;
+	private JTextField txtPeso;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ImcJPanel frame = new ImcJPanel();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public ImcJPanel() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblIndiceDeMassa = new JLabel("Indice de massa corporal");
+		lblIndiceDeMassa.setBounds(10, 11, 414, 14);
+		contentPane.add(lblIndiceDeMassa);
+		
+		JLabel lblAltura = new JLabel("Altura");
+		lblAltura.setBounds(10, 36, 46, 14);
+		contentPane.add(lblAltura);
+		
+		JLabel lblPeso = new JLabel("Peso");
+		lblPeso.setBounds(10, 61, 46, 14);
+		contentPane.add(lblPeso);
+		
+		txtAltura = new JTextField();
+		txtAltura.setBounds(49, 33, 86, 20);
+		contentPane.add(txtAltura);
+		txtAltura.setColumns(10);
+		
+		txtPeso = new JTextField();
+		txtPeso.setBounds(49, 58, 86, 20);
+		contentPane.add(txtPeso);
+		txtPeso.setColumns(10);
+		
+		JButton btnCalcular = new JButton("Calcular!");
+		btnCalcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String Altura = txtAltura.getText();
+				String peso = txtPeso.getText();
+				// calc do imc
+				Double imc = p.getPeso()/(p.getAltura()*p.getAltura());
+				
+			}
+		});
+		btnCalcular.setBounds(10, 86, 125, 23);
+		contentPane.add(btnCalcular);
+		
+		JLabel lblNewLabel = new JLabel("Resultado");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(169, 33, 255, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblImc = new JLabel("");
+		lblImc.setBounds(169, 61, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblStatus = new JLabel("");
+		lblStatus.setBounds(169, 90, 46, 14);
+		contentPane.add(lblNewLabel_2);
+	}
+
+}
