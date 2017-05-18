@@ -1,0 +1,149 @@
+package Graf;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+
+public class calculadora extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					calculadora frame = new calculadora();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public calculadora() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 309, 486);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setHorizontalAlignment(SwingConstants.RIGHT);
+		textField.setBounds(10, 50, 269, 35);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel label = new JLabel("0");
+		label.setBounds(10, 11, 269, 14);
+		contentPane.add(label);
+		
+		JButton button = new JButton("7");
+		button.setBackground(new Color(0, 204, 153));
+		button.setBounds(10, 96, 41, 41);
+		contentPane.add(button);
+		
+		JButton button_1 = new JButton("8");
+		button_1.setBackground(new Color(0, 204, 153));
+		button_1.setBounds(61, 96, 41, 41);
+		contentPane.add(button_1);
+		
+		JButton button_2 = new JButton("9");
+		button_2.setBackground(new Color(0, 204, 153));
+		button_2.setBounds(112, 96, 41, 41);
+		contentPane.add(button_2);
+		
+		JButton button_3 = new JButton("4");
+		button_3.setBackground(new Color(0, 204, 153));
+		button_3.setBounds(10, 148, 41, 41);
+		contentPane.add(button_3);
+		
+		JButton button_4 = new JButton("5");
+		button_4.setBackground(new Color(0, 204, 153));
+		button_4.setBounds(61, 148, 41, 41);
+		contentPane.add(button_4);
+		
+		JButton button_5 = new JButton("6");
+		button_5.setBackground(new Color(0, 204, 153));
+		button_5.setBounds(112, 148, 41, 41);
+		contentPane.add(button_5);
+		
+		JButton button_6 = new JButton("1");
+		button_6.setBackground(new Color(0, 204, 153));
+		button_6.setBounds(10, 200, 41, 41);
+		contentPane.add(button_6);
+		
+		JButton button_7 = new JButton("2");
+		button_7.setBackground(new Color(0, 204, 153));
+		button_7.setBounds(61, 200, 41, 41);
+		contentPane.add(button_7);
+		
+		JButton button_8 = new JButton("3");
+		button_8.setBackground(new Color(0, 204, 153));
+		button_8.setBounds(112, 200, 41, 41);
+		contentPane.add(button_8);
+		
+		JButton button_9 = new JButton("0");
+		button_9.setBackground(new Color(0, 204, 153));
+		button_9.setBounds(10, 252, 143, 41);
+		contentPane.add(button_9);
+		
+		JButton btnCe = new JButton("CE");
+		btnCe.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCe.setForeground(new Color(255, 255, 255));
+		btnCe.setBackground(new Color(255, 0, 51));
+		btnCe.setBounds(163, 96, 116, 41);
+		contentPane.add(btnCe);
+		
+		JButton button_10 = new JButton("/");
+		button_10.setForeground(Color.WHITE);
+		button_10.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_10.setBackground(new Color(255, 0, 51));
+		button_10.setBounds(163, 148, 53, 41);
+		contentPane.add(button_10);
+		
+		JButton button_11 = new JButton("+");
+		button_11.setForeground(Color.WHITE);
+		button_11.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_11.setBackground(new Color(255, 0, 51));
+		button_11.setBounds(163, 200, 53, 41);
+		contentPane.add(button_11);
+		
+		JButton button_12 = new JButton("*");
+		button_12.setForeground(Color.WHITE);
+		button_12.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_12.setBackground(new Color(255, 0, 51));
+		button_12.setBounds(226, 148, 53, 41);
+		contentPane.add(button_12);
+		
+		JButton button_13 = new JButton("-");
+		button_13.setForeground(Color.WHITE);
+		button_13.setFont(new Font("Tahoma", Font.BOLD, 11));
+		button_13.setBackground(new Color(255, 0, 51));
+		button_13.setBounds(226, 200, 53, 41);
+		contentPane.add(button_13);
+		
+		JButton button_14 = new JButton("=");
+		button_14.setBackground(new Color(0, 102, 255));
+		button_14.setBounds(163, 252, 116, 41);
+		contentPane.add(button_14);
+	}
+}
