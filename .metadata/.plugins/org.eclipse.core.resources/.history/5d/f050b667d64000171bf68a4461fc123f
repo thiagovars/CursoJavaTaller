@@ -1,0 +1,22 @@
+package Conexion;
+import java.sql.*;
+
+public class ConexionDAO {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Connection connect = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			
+		} catch (Exception e) {
+			System.out.println("erro de conexión com Base de Datos");
+		}
+	}
+
+}

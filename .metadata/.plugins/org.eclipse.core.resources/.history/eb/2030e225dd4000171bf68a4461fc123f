@@ -1,0 +1,14 @@
+package CadastroMail;
+import java.sql.*;
+
+public class Conexion {
+
+	public Conexion(){
+		Connection connect = null;
+		Statement statement = null;
+		ResultSet resulSet = null;
+	}
+	
+	
+	
+}

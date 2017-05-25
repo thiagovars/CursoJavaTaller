@@ -1,0 +1,22 @@
+package CadastroMail;
+import java.sql.*;
+
+public class Conexion {
+	
+	private Connection connect;
+	private Statement statement;
+	private ResultSet resultSet;
+	
+	public Conexion(){
+		connect = null;
+		statement = null;
+		resultSet = null;
+	}
+	
+	public void insert(String nombre, String cedula, String mail) {
+		if	(this.connect == null || this.statement == null || this.resultSet == null) {
+			
+		}
+	}
+	
+}

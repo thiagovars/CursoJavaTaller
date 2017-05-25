@@ -1,0 +1,36 @@
+package CadastroMail;
+import java.sql.*;
+
+public class Conexion {
+	
+	private Connection connect;
+	private Statement statement;
+	private ResultSet resultSet;
+	
+	public Conexion(){
+		connect = null;
+		statement = null;
+		resultSet = null;
+	}
+	
+	public void insert(String nombre, String cedula, String mail, String database) {
+		if	(this.connect == null || this.statement == null || this.resultSet == null) {
+			this.getStarted();
+		}
+		this.createDataBase(database);
+	}
+	
+	public void getStarted() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection("jdbc:mysql://127.0.0.1/", "root", "");
+			statement = connect.createStatement();			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void createDataBase(String database) {
+		this.statement.execute("CREATE DATA BASE IF NOT EXISTS BRA_" + database);
+	}
+}
