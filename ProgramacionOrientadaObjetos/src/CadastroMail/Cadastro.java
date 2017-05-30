@@ -81,7 +81,7 @@ public class Cadastro extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Conexion conn = new Conexion();
-				conn.setBasedata("cadastro");
+				conn.setBasedata("BRA_cadastro");
 				String nombre = txtNombre.getText();
 				String cedula = txtCedula.getText();
 				String mail = txtMail.getText();

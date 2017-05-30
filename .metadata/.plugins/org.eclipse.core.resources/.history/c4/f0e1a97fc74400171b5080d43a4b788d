@@ -1,0 +1,61 @@
+package CineJPanel;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JToolBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+
+public class cineJFrame extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					cineJFrame frame = new cineJFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public cineJFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JMenu mnFile = new JMenu("File");
+		mnFile.setBounds(10, 0, 91, 21);
+		contentPane.add(mnFile);
+		
+		JMenuItem mntmSelect = new JMenuItem("Select");
+		mnFile.add(mntmSelect);
+		
+		JMenuItem mntmEdit = new JMenuItem("Edit");
+		mnFile.add(mntmEdit);
+		
+		JMenuItem mntmDelete = new JMenuItem("Delete");
+		mnFile.add(mntmDelete);
+		
+		JMenuItem mntmInsert = new JMenuItem("Insert");
+		mnFile.add(mntmInsert);
+	}
+}

@@ -25,13 +25,11 @@ public class Conexion {
 	public void insert(String nombre, String cedula, String mail, String table) {
 		if	(this.connect == null || this.statement == null || this.resultSet == null) {
 			this.getStarted();
-			System.out.println(this.statement == null);
 		}
-		this.createDataBase(this.basedata);
+		this.createDataBase();
 		this.createTable(table);
-		String sql = "INSERT INTO " + table + " VALUES ("+nombre+", "+cedula+", "+mail+");";
+		String sql = "INSERT INTO " + table + " (nombre, cedula, mail) VALUES ('"+nombre+"', '"+cedula+"', '"+mail+"');";
 		this.execute(sql);
-		
 	}
 	
 	public void execute(String sql) {
@@ -46,8 +44,10 @@ public class Conexion {
 	private void createTable(String table) {
 		try {
 			String especs = this.getEspecs(table);
-			this.statement.execute("USE " + this.basedata);
-			this.statement.execute("CREATE TABLE IF NOT EXISTS "+ table + especs + ";");
+			String sql = "USE " + this.getBasedata() + ";";
+			this.statement.execute(sql);
+			sql = "CREATE TABLE IF NOT EXISTS "+ especs + ";";
+			this.statement.execute(sql);
 		} catch (Exception e) {
 			System.out.println("impossible crear la tabla " + e.getMessage());
 		}
@@ -73,12 +73,12 @@ public class Conexion {
 		}
 	}
 	
-	public void createDataBase(String database) {
+	public void createDataBase() {
 		try {
-			this.statement.execute("USE " + this.basedata);
-			this.statement.execute("CREATE DATABASE IF NOT EXISTS BRA_" + database);
+			String sql = "CREATE DATABASE IF NOT EXISTS " + this.basedata;
+			this.statement.execute(sql);
 		} catch (Exception e) {
-			System.out.println("imposible crear base de datos: " + e.getMessage());
+			System.out.println("impossible crear base de datos: " + e.getMessage());
 		}
 	}
 	
