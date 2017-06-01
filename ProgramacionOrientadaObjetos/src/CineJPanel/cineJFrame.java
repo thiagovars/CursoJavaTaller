@@ -54,23 +54,29 @@ public class cineJFrame extends JFrame {
 		JMenuItem delete = new JMenuItem("Delete");
 		
 		
-		// 4. Despues se añaden los elementos de menu a su correspondiente menu.
 		archivo.add(select);
 		archivo.add(edit);
 		archivo.add(insert);
 		archivo.add(delete);		 
 		
-		// 5. y por ultimo se añaden los menus a la barra.
 		barra.add(archivo);
 		
-		// 6. Luego se añade la barra al applet.
 		setJMenuBar(barra);
 		
-		// 7. Configuro el submenu Acerca de.. para abrir otra ventana
 		select.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {			
-				SelectScreen Otraventana = new SelectScreen();
-				Otraventana.setVisible(true);
+				SelectScreen SelectVentana = new SelectScreen();
+				SelectVentana.setVisible(true);
+			}
+		});
+		
+		insert.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				InsertScreen insertVentana = new InsertScreen();
+				insertVentana.setVisible(true);
 			}
 		});
 	}

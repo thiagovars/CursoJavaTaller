@@ -1,20 +1,23 @@
 package CineJPanel;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.TitledBorder;
 
 public class SelectScreen extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -37,18 +40,30 @@ public class SelectScreen extends JFrame {
 	 */
 	public SelectScreen() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 480, 400);
+		setBounds(100, 100, 238, 303);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JTextPane textResultado = new JTextPane();
-		String sql = "SELECT * FROM peliculas;";
+		String[] column = {"codigo", "nombre", "calificacion"};
 		ConexionDAO conn = new ConexionDAO();
-		ResultSet result = conn.select(sql);
-		textResultado.setText(conn.select(sql).toString());
-		textResultado.setBounds(10, 11, 429, 340);
-		contentPane.add(textResultado);
+		Object[][] peliculas = conn.select_peliculas();
+		
+		
+		table = new JTable();
+		table.setBounds(10, 11, 444, 340);
+		table.setFillsViewportHeight(false);
+		table.setModel(new DefaultTableModel(peliculas, column));
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(60);
+		contentPane.add(table.getTableHeader());
+		contentPane.add(table);
+		
+		
+		
+		
+		//DefaultTableModel datos = new DefaultTableModel(peliculas, column);
+		//table.setModel(datos);
+		
+
 	}
 }
