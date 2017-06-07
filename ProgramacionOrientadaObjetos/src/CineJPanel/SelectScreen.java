@@ -40,7 +40,7 @@ public class SelectScreen extends JFrame {
 	 */
 	public SelectScreen() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 238, 303);
+		setBounds(100, 1, 717, 340);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		
@@ -50,11 +50,14 @@ public class SelectScreen extends JFrame {
 		
 		
 		table = new JTable();
-		table.setBounds(10, 11, 444, 340);
-		table.setFillsViewportHeight(false);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setBounds(10, 1, 444, 340);
+		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(peliculas, column));
 		
-		table.getColumnModel().getColumn(0).setPreferredWidth(60);
+		table.getColumnModel().getColumn(0).setPreferredWidth(45);
+		table.getColumnModel().getColumn(1).setPreferredWidth(500);
+		table.getColumnModel().getColumn(2).setPreferredWidth(80);
 		contentPane.add(table.getTableHeader());
 		contentPane.add(table);
 		
