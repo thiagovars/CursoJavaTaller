@@ -68,7 +68,8 @@ public class ConexionDAO {
 			return data;
 		}
 		
-		public void insert(String nombre, int calificacion, String table) {
+		public String insert(String nombre, int calificacion, String table) {
+			String retorno = "";
 			this.createDataBase();
 			this.createTable(table);
 			String sql = "INSERT INTO " + table + " (nombre, calificacion) VALUES ('"+nombre+"', '"+calificacion+"');";
@@ -76,9 +77,11 @@ public class ConexionDAO {
 				PreparedStatement pstm = this.connect.prepareStatement(sql);
 				pstm.execute();
 				pstm.close();
+				retorno = "Película inserida con suceso";
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				retorno = "Error; "+e.getMessage();
 			}
+			return retorno;
 		}
 		
 		private void createTable(String table) {
@@ -130,16 +133,16 @@ public class ConexionDAO {
 			return result;
 		}
 		
-		public boolean delete_peliculas(String nombre) {
-			boolean result = false;
+		public String delete_peliculas(String nombre) {
+			String result = "";
 			String sql = "DELETE FROM PELICULAS WHERE nombre LIKE  '%" + nombre + "%'";
 			try {
 				PreparedStatement pstm = this.connect.prepareStatement(sql);
 				pstm.execute();
 				pstm.close();
-				result=true;
+				result = "Película removida con suceso";
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				result = "Error: "+e.getMessage();
 			}
 			return result;
 		}
