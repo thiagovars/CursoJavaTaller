@@ -146,4 +146,24 @@ public class ConexionDAO {
 			}
 			return result;
 		}
+		
+		public boolean validateUser(String nombre, String passw) {
+			int registros = 0;
+			String totalRegistros = "SELECT count(*) as total FROM usuarios WHERE nombre LIKE '%"+nombre+"%' AND passw = '"+passw+"'";
+			try {
+				PreparedStatement psm = connect.prepareStatement(totalRegistros);
+				ResultSet result = psm.executeQuery();
+				result.next();
+				registros = result.getInt("total");
+				result.close();
+				if (registros == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (Exception e) {
+				System.out.println("No se ha podido recuperar registros: " + e.getMessage());
+			}
+			return false;
+		}
 }

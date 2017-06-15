@@ -1,0 +1,14 @@
+package CineJPanel;
+
+public class user {
+
+	public String name;
+	private String passw;
+	private ConexionDAO conn;
+	
+	public void user(String nombre) {
+		this.name = nombre;
+	}
+	
+	
+}

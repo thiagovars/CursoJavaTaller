@@ -25,6 +25,7 @@ public class cineJFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private boolean logged = false; 
 
 	/**
 	 * Launch the application.
@@ -53,14 +54,17 @@ public class cineJFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
 		
-		cargaDatosCine();
+		if (this.logged) {
+			cargaDatosCine();
+		}
+		
 		JMenuBar barra = new JMenuBar();
 
-		JMenu archivo = new JMenu("Archivo");
+		JMenu archivo    = new JMenu("Archivo");
 		
 		JMenuItem insert = new JMenuItem("Insert");
 		JMenuItem delete = new JMenuItem("Delete");
-		JMenuItem exit = new JMenuItem("Exit");
+		JMenuItem exit   = new JMenuItem("Exit");
 		
 		archivo.add(insert);
 		archivo.add(delete);
