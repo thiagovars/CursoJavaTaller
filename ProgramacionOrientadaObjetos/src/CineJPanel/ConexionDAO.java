@@ -68,27 +68,29 @@ public class ConexionDAO {
 			return data;
 		}
 		
-		public void insert(String nombre, String calificacion, String codPelicula, String table) {
+		public String insert(String nombre, int calificacion, String table) {
+			String retorno = "";
 			this.createDataBase();
 			this.createTable(table);
-			String sql = "INSERT INTO " + table + " ("+this.getFields(table)+") VALUES ('"+nombre+"', '"+calificacion+"', '"+codPelicula+"');";
-			this.execute(sql);
-		}
-		
-		public void execute(String sql) {
+			String sql = "INSERT INTO " + table + " (nombre, calificacion) VALUES ('"+nombre+"', '"+calificacion+"');";
 			try {
-				this.statement.execute("USE " + this.basedata);
-				this.statement.execute(sql);
+				PreparedStatement pstm = this.connect.prepareStatement(sql);
+				pstm.execute();
+				pstm.close();
+				retorno = "Película inserida con suceso";
 			} catch (Exception e) {
-				System.out.println("impossible inserir en la tabla " + e.getMessage());
+				retorno = "Error; "+e.getMessage();
 			}
+			return retorno;
 		}
 		
 		private void createTable(String table) {
 			try {
 				String especs = this.getEspecs(table);
 				String sql = "CREATE TABLE IF NOT EXISTS "+ especs + ";";
-				this.statement.execute(sql);
+				PreparedStatement pstm = this.connect.prepareStatement(sql);
+				pstm.execute();
+				pstm.close();
 			} catch (Exception e) {
 				System.out.println("impossible crear la tabla " + e.getMessage());
 			}
@@ -100,6 +102,8 @@ public class ConexionDAO {
 				case "cine":
 					espec = table + " (id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, nombre VARCHAR(80), cedula VARCHAR(9), mail VARCHAR(199))";
 					break;
+				case "peliculas":
+					espec = table + " (codigo INT PRIMARY KEY NOT NULL AUTO_INCREMENT, nombre VARCHAR(30), calificacion VARCHAR(20)) ";
 			}
 			return espec;
 		}
@@ -107,24 +111,59 @@ public class ConexionDAO {
 		public void createDataBase() {
 			try {
 				String sql = "CREATE DATABASE IF NOT EXISTS " + this.basedata;
-				this.statement.execute(sql);
+				PreparedStatement pstm = this.connect.prepareStatement(sql);
+				pstm.execute();
+				pstm.close();
 			} catch (Exception e) {
 				System.out.println("impossible crear base de datos: " + e.getMessage());
 			}
 		}
 		
-		public void close() {
+		public boolean update_peliculas(String tupla, String codigo) {
+			boolean result = false;
+			String sql = "UPDATE PELICULAS SET "+tupla+" WHERE codigo = " + codigo;
 			try {
-				this.statement.close();
-				this.connect.close();
+				PreparedStatement pstm = this.connect.prepareStatement(sql);
+				pstm.execute();
+				pstm.close();
+				result = true;
 			} catch (Exception e) {
-				System.out.println("imposible cerrar la conexion " + e.getMessage());
+				System.out.println("imposible editar la tabla error: "+e.getMessage());
 			}
-			
+			return result;
 		}
-
-	
-	
-	
-	
+		
+		public String delete_peliculas(String nombre) {
+			String result = "";
+			String sql = "DELETE FROM PELICULAS WHERE nombre LIKE  '%" + nombre + "%'";
+			try {
+				PreparedStatement pstm = this.connect.prepareStatement(sql);
+				pstm.execute();
+				pstm.close();
+				result = "Película removida con suceso";
+			} catch (Exception e) {
+				result = "Error: "+e.getMessage();
+			}
+			return result;
+		}
+		
+		public boolean validateUser(String nombre, String passw) {
+			int registros = 0;
+			String totalRegistros = "SELECT count(*) as total FROM usuarios WHERE nombre LIKE '%"+nombre+"%' AND passw = '"+passw+"'";
+			try {
+				PreparedStatement psm = connect.prepareStatement(totalRegistros);
+				ResultSet result = psm.executeQuery();
+				result.next();
+				registros = result.getInt("total");
+				result.close();
+				if (registros == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (Exception e) {
+				System.out.println("No se ha podido recuperar registros: " + e.getMessage());
+			}
+			return false;
+		}
 }

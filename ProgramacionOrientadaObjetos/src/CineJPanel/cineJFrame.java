@@ -54,12 +54,9 @@ public class cineJFrame extends JFrame {
 		ConexionDAO conn = new ConexionDAO();
 		Object[][] peliculas = conn.select_peliculas();
 		
-		table = new JTable();
-		table.setBounds(10, 1, 444, 222);
-		table.setModel(new DefaultTableModel(peliculas, column));
-		
-		table.getColumnModel().getColumn(0).setMaxWidth(0);
+		table.getColumnModel().getColumn(0).setPreferredWidth(15);
 		table.getColumnModel().getColumn(0).setMinWidth(0);
+		table.getColumnModel().getColumn(0).setMaxWidth(15);
 		table.getColumnModel().getColumn(1).setPreferredWidth(500);
 		table.getColumnModel().getColumn(2).setPreferredWidth(80);
 		
