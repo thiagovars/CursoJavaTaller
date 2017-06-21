@@ -41,7 +41,7 @@ public class LoginScreen extends JFrame {
 	 */
 	public LoginScreen() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 325, 150);
+		setBounds(100, 100, 398, 220);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -75,14 +75,16 @@ public class LoginScreen extends JFrame {
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre = txtNombre.getText();
-				String pass   = txtPassW.getText();
+				String passw  = txtPassW.getText();
 				user usr = new user();
-				usr.validateLogin(nombre, pass);
-				//if(usr.validatePassw(pass)){
-					//dispose();
-				//} else {
-					//lblRetorno.setText("usuario no encontrado");
-				//}
+				if(usr.validateLogin(nombre, passw)){
+//					cineJFrame cineFrame = new cineJFrame();
+//					System.out.println(cineFrame);
+//					cineFrame.setVisible(true);
+					dispose();
+				} else {
+					lblRetorno.setText("usuario no encontrado");
+				}
 			}
 		});
 		btnLogIn.setBounds(137, 89, 91, 23);
