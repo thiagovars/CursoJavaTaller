@@ -37,7 +37,7 @@ public class mainFrame extends JFrame {
 	 */
 	public mainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 406, 161);
+		setBounds(100, 100, 522, 295);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -51,12 +51,17 @@ public class mainFrame extends JFrame {
 		menu.add(archivo);
 		setJMenuBar(menu);
 		
+		LoginScreen loginVentana = new LoginScreen();
+		
 		login.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				LoginScreen loginVentana = new LoginScreen ();
+				LoginScreen loginVentana = new LoginScreen();
 				loginVentana.setVisible(true);
+				
+				cineJFrame cine = new cineJFrame();
+				
 			}
 		});
 		
