@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -46,6 +47,7 @@ public class LoginScreen extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setTitle("Login - Cine");
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(80, 11, 197, 20);
@@ -78,12 +80,14 @@ public class LoginScreen extends JFrame {
 				String passw  = txtPassW.getText();
 				user usr = new user();
 				if(usr.validateLogin(nombre, passw)){
-//					cineJFrame cineFrame = new cineJFrame();
-//					System.out.println(cineFrame);
-//					cineFrame.setVisible(true);
+					JOptionPane.showMessageDialog(null, "Login realizado con sucesso");
+					cineJFrame cine = new cineJFrame();
+					cine.teste = "este è o que escrevi";
+					cine.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					cine.setVisible(true);
 					dispose();
 				} else {
-					lblRetorno.setText("usuario no encontrado");
+					JOptionPane.showMessageDialog(null, "Usuario / Clave con error");
 				}
 			}
 		});

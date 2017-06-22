@@ -108,7 +108,7 @@ public class InsertScreen extends JFrame {
 	public void cargaDatosCine() {
 		String[] column = {"codigo", "nombre", "calificacion"};
 		ConexionDAO conn = new ConexionDAO();
-		Object[][] peliculas = conn.select_peliculas();
+		Object[][] peliculas = conn.select_peliculas("");
 		
 		table = new JTable();
 		table.setBounds(0, 154, 440, 250);

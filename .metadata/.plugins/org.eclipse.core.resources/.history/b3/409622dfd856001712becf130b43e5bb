@@ -1,0 +1,6 @@
+package conexion;
+import java.sql.*;
+
+public class connDAO {
+	private final base = "bra_ght";
+}

@@ -46,7 +46,7 @@ public class SelectScreen extends JFrame {
 		
 		String[] column = {"codigo", "nombre", "calificacion"};
 		ConexionDAO conn = new ConexionDAO();
-		Object[][] peliculas = conn.select_peliculas();
+		Object[][] peliculas = conn.select_peliculas("");
 		
 		
 		table = new JTable();

@@ -35,10 +35,14 @@ public class ConexionDAO {
 			return fields;
 		}
 		
-		public Object[][] select_peliculas() {
+		public Object[][] select_peliculas(String tupla) {
 			int registros = 0;
 			String peliculas = "SELECT codigo, nombre, calificacion FROM peliculas";
 			String totalRegistros = "SELECT count(*) as total FROM peliculas";
+			if(!tupla.equals("")){
+				peliculas += " WHERE "+tupla;
+				totalRegistros += " WHERE "+tupla;
+			}
 			try {
 				PreparedStatement psm = connect.prepareStatement(totalRegistros);
 				ResultSet result = psm.executeQuery();
