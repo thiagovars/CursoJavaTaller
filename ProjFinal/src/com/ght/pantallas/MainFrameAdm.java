@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class MainFrame extends JFrame {
+public class MainFrameAdm extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame();
+					MainFrameAdm frame = new MainFrameAdm();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,8 +30,8 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame() {
-		setTitle("Gestor de Horarios de Trabajo");
+	public MainFrameAdm() {
+		setTitle("Gestor de Horarios de Trabajo -- ADMINISTRADOR");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

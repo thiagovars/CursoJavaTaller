@@ -20,24 +20,21 @@ public class ConnDAO {
 		}
 	}
 	
-	public boolean iniciarSession(String nombre, String passw){
-		int registros = 0;
-		String totalRegistros = "SELECT count(*) as total FROM usuarios WHERE nombre LIKE '%"+nombre+"%' AND passw = '"+passw+"'";
+	public Object[] iniciarSession(String nombre, String passw){
+		Object[] retorno = new String[2];
+		String query = "SELECT nombre, tipo FROM usuarios WHERE nombre LIKE '%"+nombre+"%' AND passw = '"+passw+"'";
 		try {
-			PreparedStatement psm = connect.prepareStatement(totalRegistros);
+			PreparedStatement psm = connect.prepareStatement(query);
 			ResultSet result = psm.executeQuery();
 			result.next();
-			registros = result.getInt("total");
+			retorno[0] = result.getString("nombre");
+			retorno[1] = result.getString("tipo");
 			result.close();
-			if (registros == 1) {
-				return true;
-			} else {
-				return false;
-			}
+			return retorno;
 		} catch (Exception e) {
 			System.out.println("No se ha podido validar usuario: " + e.getMessage());
 		}
-		return false;
+		return retorno;
 	}
 	
 }

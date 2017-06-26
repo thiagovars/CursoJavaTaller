@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class IniciarSession extends JFrame {
 
@@ -47,27 +49,29 @@ public class IniciarSession extends JFrame {
 	 */
 	public IniciarSession() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 311, 175);
+		setBounds(100, 100, 483, 284);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setBounds(58, 26, 36, 14);
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblLogin.setBounds(125, 55, 47, 14);
 		contentPane.add(lblLogin);
 		
 		JLabel lblClave = new JLabel("Clave");
-		lblClave.setBounds(58, 51, 36, 14);
+		lblClave.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblClave.setBounds(125, 80, 47, 14);
 		contentPane.add(lblClave);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(97, 23, 137, 20);
+		txtNombre.setBounds(185, 53, 137, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtPassw = new JPasswordField();
-		txtPassw.setBounds(98, 51, 136, 20);
+		txtPassw.setBounds(186, 78, 136, 20);
 		contentPane.add(txtPassw);
 		
 		lblRetorno = new JLabel("");
@@ -77,23 +81,36 @@ public class IniciarSession extends JFrame {
 		contentPane.add(lblRetorno);
 		
 		JButton btnIniciarSession = new JButton("Iniciar Session");
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNombre, txtPassw, btnIniciarSession, contentPane, lblLogin, lblClave}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNombre, txtPassw, btnIniciarSession}));
 		btnIniciarSession.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre = txtNombre.getText();
 				String passw = txtPassw.getText();
 				Usuarios usuario = new Usuarios();
-				if (usuario.iniciarSession(nombre, passw)) {
-					MainFrame principal = new MainFrame();
-					principal.setVisible(true);
+				try	{
+					usuario.iniciarSession(nombre, passw);
+					switch	(usuario.getTipoUsuario()) {
+						case "A":
+							MainFrameAdm pantAdm = new MainFrameAdm();
+							pantAdm.setExtendedState(JFrame.MAXIMIZED_BOTH);
+							pantAdm.setVisible(true);
+							break;
+						case "F":
+							MainFrameFuncionario pantFunc = new MainFrameFuncionario();
+							pantFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
+							pantFunc.setVisible(true);
+							break;
+						default:
+							JOptionPane.showMessageDialog(null, "Tipo usuario no encontrado!");
+							break;
+					}
 					dispose();
-				} else {
-					lblRetorno.setText("usuario o clave incorreta");
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Usuario / Clave con error");
 				}
-				
 			}
 		});
-		btnIniciarSession.setBounds(58, 80, 176, 23);
+		btnIniciarSession.setBounds(146, 132, 176, 23);
 		contentPane.add(btnIniciarSession);
 		
 	}
