@@ -1,7 +1,0 @@
-package com.ght.classes;
-
-import com.ght.conexion.*;
-
-public class Usuarios {
-	
-}
