@@ -20,6 +20,10 @@ SET time_zone = "+00:00";
 -- Database: `bra_ght`
 --
 
+CREATE DATABASE IF NOT EXISTS BRA_GHT;
+
+USE BRA_GHT;
+
 -- --------------------------------------------------------
 
 --

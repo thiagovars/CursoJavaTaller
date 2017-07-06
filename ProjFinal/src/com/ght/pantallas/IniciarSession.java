@@ -91,12 +91,12 @@ public class IniciarSession extends JFrame {
 					usuario.iniciarSession(nombre, passw);
 					switch	(usuario.getTipoUsuario()) {
 						case "A":
-							MainFrameAdm pantAdm = new MainFrameAdm();
+							MainAdmFrame pantAdm = new MainAdmFrame();
 							pantAdm.setExtendedState(JFrame.MAXIMIZED_BOTH);
 							pantAdm.setVisible(true);
 							break;
 						case "F":
-							MainFrameFuncionario pantFunc = new MainFrameFuncionario();
+							MainFuncionarioFrame pantFunc = new MainFuncionarioFrame();
 							pantFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
 							pantFunc.setVisible(true);
 							break;
