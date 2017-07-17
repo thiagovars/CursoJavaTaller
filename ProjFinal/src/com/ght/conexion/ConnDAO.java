@@ -8,7 +8,7 @@ public class ConnDAO {
 	private final String host   = "jdbc:mysql://localhost/"+base;
 	private Connection connect  = null;
 	private Statement statement = null;
-	private ResultSet resultSet = null;
+	private ResultSet result    = null;
 	
 	public ConnDAO() {
 		try {
@@ -16,25 +16,22 @@ public class ConnDAO {
 			connect = DriverManager.getConnection(host, usr, passw);
 			statement = connect.createStatement();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("Não foi possível pegar o drive! "+e.getMessage());
 		}
 	}
 	
-	public Object[] iniciarSession(String nombre, String passw){
-		Object[] retorno = new String[2];
-		String query = "SELECT nombre, tipo FROM usuarios WHERE nombre LIKE '%"+nombre+"%' AND passw = '"+passw+"'";
+	public ResultSet buscar(String query) {
 		try {
 			PreparedStatement psm = connect.prepareStatement(query);
 			ResultSet result = psm.executeQuery();
-			result.next();
-			retorno[0] = result.getString("nombre");
-			retorno[1] = result.getString("tipo");
-			result.close();
-			return retorno;
+			return result;
 		} catch (Exception e) {
-			System.out.println("No se ha podido validar usuario: " + e.getMessage());
+			System.out.println(e.getMessage());
 		}
-		return retorno;
+		return null;
 	}
 	
+	public int insere(String query) {
+		
+	}
 }

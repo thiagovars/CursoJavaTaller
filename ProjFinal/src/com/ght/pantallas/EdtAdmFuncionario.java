@@ -44,7 +44,7 @@ public class EdtAdmFuncionario extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JMenuBar menu = new JMenuBar();
+JMenuBar menu = new JMenuBar();
 		
 		JMenu archivo         = new JMenu("File");
 		JMenu cadastro        = new JMenu("Cadastro");
@@ -61,9 +61,9 @@ public class EdtAdmFuncionario extends JFrame {
 		JMenuItem nuevaCategoria = new JMenuItem("Nueva Categoria");
 		JMenuItem editaCategoria = new JMenuItem("Editar Categoria");
 		JMenuItem excluCategoria = new JMenuItem("Excluir Categoria");
-		JMenuItem Sueldo         = new JMenuItem("Sueldo de Los Usuarios");
-		JMenuItem Perfiles       = new JMenuItem("Perfiles Usuarios");
-		JMenuItem Permisiones    = new JMenuItem("Permissiones");
+		JMenuItem sueldo         = new JMenuItem("Sueldo de Los Usuarios");
+		JMenuItem perfiles       = new JMenuItem("Perfiles Usuarios");
+		JMenuItem permisiones    = new JMenuItem("Permissiones");
 		
 		JMenuItem cierreMensual  = new JMenuItem("Cierre del Mes");
 		JMenuItem pasadoMensual  = new JMenuItem("Cierres Pasados");
@@ -78,9 +78,9 @@ public class EdtAdmFuncionario extends JFrame {
 		configuraciones.add(nuevaCategoria);
 		configuraciones.add(editaCategoria);
 		configuraciones.add(excluCategoria);
-		configuraciones.add(Sueldo);
-		configuraciones.add(Perfiles);
-		configuraciones.add(Permisiones);
+		configuraciones.add(sueldo);
+		configuraciones.add(perfiles);
+		configuraciones.add(permisiones);
 		
 		controlMensual.add(cierreMensual);
 		controlMensual.add(pasadoMensual);
@@ -151,6 +151,92 @@ public class EdtAdmFuncionario extends JFrame {
 				// TODO Auto-generated method stub
 				ExclAdmFuncionario pantExclFuncionario = new ExclAdmFuncionario();
 				pantExclFuncionario.setVisible(true);
+				dispose();
+			}
+		});
+		/**
+		 * Ación de los menus de las CATEGORIAS
+		 */
+		nuevaCategoria.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				IncAdmCategoria pantIncCategoria = new IncAdmCategoria();
+				pantIncCategoria.setVisible(true);
+				dispose();
+			}
+		});
+		editaCategoria.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				EdtAdmCategoria pantEdtCategoria = new EdtAdmCategoria();
+				pantEdtCategoria.setVisible(true);
+				dispose();
+			}
+		});
+		excluCategoria.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				ExclAdmCategoria pantExclCategoria = new ExclAdmCategoria();
+				pantExclCategoria.setVisible(true);
+				dispose();
+			}
+		});
+		sueldo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				SueldoAdmCategoria pantSueldoCategoria = new SueldoAdmCategoria();
+				pantSueldoCategoria.setVisible(true);
+				dispose();
+			}
+		});
+		permisiones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				PermisAdmCategoria pantPermisCategoria = new PermisAdmCategoria();
+				pantPermisCategoria.setVisible(true);
+				dispose();
+			}
+		});
+		perfiles.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				PerfileAdmCategoria pantPerfileCategoria = new PerfileAdmCategoria();
+				pantPerfileCategoria.setVisible(true);
+				dispose();
+			}
+		});
+		/**
+		 * Ación del menu CONTROL MENSUAL
+		 */
+		cierreMensual.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				CierreAdmControlMensual pantCierreControlMensual = new CierreAdmControlMensual();
+				pantCierreControlMensual.setVisible(true);
+				dispose();
+			}
+		});
+		pasadoMensual.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				PasadoAdmControlMensual pantPstCtrlMensual = new PasadoAdmControlMensual();
+				pantPstCtrlMensual.setVisible(true);
 				dispose();
 			}
 		});

@@ -1,14 +1,20 @@
 package com.ght.classes;
 
-import com.ght.conexion.*;
+import java.lang.reflect.Array;
+
+import com.ght.conexion.ConnUsuarios;
 
 public class Usuarios {
 	
 	private String usrLogado;
 	private String tipoUsuario;
+	private ConnUsuarios conn;
+	
+	public Usuarios() {
+		this.conn = new ConnUsuarios();
+	}
 	
 	public boolean iniciarSession(String nombre, String passw) {
-		ConnDAO conn = new ConnDAO();
 		Object[] retorno = new String[2];
 		retorno = conn.iniciarSession(nombre, passw);
 		setTipoUsuario(retorno[1].toString());
@@ -30,5 +36,10 @@ public class Usuarios {
 	
 	public String getUsrLogado() {
 		return usrLogado;
+	}
+	
+	public boolean save(String nombre, String login, String categoria) {
+		Categorias categorias = new Categorias();
+		return conn.saveUsuario(nombre, login, categorias.getCodigoByName(categoria));
 	}
 }
