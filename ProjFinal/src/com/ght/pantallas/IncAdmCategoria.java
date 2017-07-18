@@ -44,7 +44,7 @@ public class IncAdmCategoria extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-JMenuBar menu = new JMenuBar();
+		JMenuBar menu = new JMenuBar();
 		
 		JMenu archivo         = new JMenu("File");
 		JMenu cadastro        = new JMenu("Cadastro");

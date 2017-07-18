@@ -18,6 +18,7 @@ public class Categorias {
 		DefaultComboBoxModel model = new DefaultComboBoxModel();
 		try {
 			ResultSet result = this.conn.getCategorias();
+			model.addElement("Select Categoria");
 			while(result.next()) {
 				model.addElement(result.getString("nombre"));
 			}

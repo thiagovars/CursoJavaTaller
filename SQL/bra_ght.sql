@@ -34,6 +34,7 @@ CREATE TABLE `categoria` (
   `codigo` int(100) NOT NULL,
   `creacion` date NOT NULL,
   `modificacion` date DEFAULT NULL,
+  `tipo` char(1) NOT NULL,
   `codConfig` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -92,7 +93,6 @@ CREATE TABLE `usuario` (
   `creacion` date NOT NULL,
   `modificacion` date DEFAULT NULL,
   `nombre` varchar(200) NOT NULL,
-  `tipo` char(1) NOT NULL,
   `passw` varchar(64) NOT NULL,
   `codCategoria` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

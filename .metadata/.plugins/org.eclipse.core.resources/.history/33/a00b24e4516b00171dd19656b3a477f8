@@ -1,0 +1,13 @@
+package com.ght.classes;
+
+import javax.swing.JMenuBar;
+
+public class ToolBarMenu {
+
+	private JMenuBar menu;
+	
+    public JMenuBar getToolbarMenu() {
+    	
+    }
+	
+}

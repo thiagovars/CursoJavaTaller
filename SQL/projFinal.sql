@@ -1,3 +1,5 @@
+
+
 CREATE TABLE CONFIGURACION (
 	codigo int(100) not null primary key auto_increment,
 	creacion date not null,
@@ -11,6 +13,7 @@ CREATE TABLE CATEGORIA (
 	codigo int(100) not null primary key auto_increment,
 	creacion date not null,
 	modificacion date null,
+	tipo char(1) not null,
 	codConfig int(100),
 	foreign key (codConfig) references CONFIGURACION (codigo)
 );
@@ -20,7 +23,6 @@ CREATE TABLE USUARIO (
 	creacion date not null,
 	modificacion date null,
 	nombre varchar(200) not null,
-	tipo char(1) not null,
 	passw varchar(64) not null,
 	codCategoria int(100),
 	foreign key (codCategoria) references CATEGORIA (codigo)

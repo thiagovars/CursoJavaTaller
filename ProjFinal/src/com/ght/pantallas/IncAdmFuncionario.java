@@ -1,17 +1,16 @@
 package com.ght.pantallas;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -21,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.ght.classes.Categorias;
+import com.ght.classes.ToolBarMenu;
 import com.ght.classes.Usuarios;
 
 public class IncAdmFuncionario extends JFrame {
@@ -57,6 +57,24 @@ public class IncAdmFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		final JLabel lblError = new JLabel("\u00A1Error. Imposible guardar usuario!");
+		lblError.setIcon(new ImageIcon(IncAdmFuncionario.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
+		lblError.setHorizontalAlignment(SwingConstants.CENTER);
+		lblError.setForeground(new Color(255, 0, 0));
+		lblError.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblError.setBounds(115, 68, 351, 35);
+		lblError.setVisible(false);
+		contentPane.add(lblError);
+		//contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNombre, txtLogin, pwdClave, comboBox_1, comboBox, btnGuardarUsuario}));
+
+		final JLabel lblSuceso = new JLabel("\u00A1Suceso! Usuario guardado con \u00E8xito");
+		lblSuceso.setForeground(new Color(0, 128, 128));
+		lblSuceso.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSuceso.setIcon(new ImageIcon(IncAdmFuncionario.class.getResource("/com/sun/java/swing/plaf/windows/icons/Inform.gif")));
+		lblSuceso.setBounds(120, 68, 373, 35);
+		lblSuceso.setVisible(false);
+		contentPane.add(lblSuceso);
+		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(500, 55, 1, 2);
 		contentPane.add(separator);
@@ -73,6 +91,7 @@ public class IncAdmFuncionario extends JFrame {
 		
 		Categorias categoria = new Categorias();
 		final JComboBox cbxCategoria = new JComboBox();
+		cbxCategoria.setToolTipText("Categoria del usuario");
 		cbxCategoria.setModel(categoria.getCategorias());
 		cbxCategoria.setBounds(217, 234, 150, 22);
 		contentPane.add(cbxCategoria);
@@ -83,15 +102,15 @@ public class IncAdmFuncionario extends JFrame {
 		contentPane.add(lblCategoria);
 		
 		txtNombre = new JTextField();
+		txtNombre.setToolTipText("Nombre del usu\u00E1rio");
 		lblNombre.setLabelFor(txtNombre);
-		txtNombre.setText("Nombre");
 		txtNombre.setBounds(218, 127, 116, 22);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtLogin = new JTextField();
+		txtLogin.setToolTipText("Login por lo cual usa el sistema");
 		lblLogin.setLabelFor(txtLogin);
-		txtLogin.setText("Login");
 		txtLogin.setColumns(10);
 		txtLogin.setBounds(218, 162, 116, 22);
 		contentPane.add(txtLogin);
@@ -102,8 +121,8 @@ public class IncAdmFuncionario extends JFrame {
 		contentPane.add(lblClave);
 		
 		txtClave = new JPasswordField();
+		txtClave.setToolTipText("Clave secreta del usuario");
 		lblClave.setLabelFor(txtClave);
-		txtClave.setText("Clave");
 		txtClave.setBounds(218, 197, 116, 22);
 		contentPane.add(txtClave);
 		
@@ -111,11 +130,17 @@ public class IncAdmFuncionario extends JFrame {
 		btnGuardarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre = txtNombre.getText();
-				String login = txtLogin.getText();
-				String passw = txtClave.getText();
+				String login  = txtLogin.getText();
+				String passw  = txtClave.getText();
 				String categoria = String.valueOf(cbxCategoria.getSelectedItem());
 				Usuarios usr = new Usuarios();
 				boolean guardarUsuario = usr.save(nombre, login, passw, categoria);
+				if(guardarUsuario) {
+				  //JOptionPane.showMessageDialog(null, "Usuario guardado con suceso");
+				    lblSuceso.setVisible(true);
+				} else {
+					lblError.setVisible(true);
+				}
 			}
 		});
 		btnGuardarUsuario.setBounds(217, 269, 150, 25);
@@ -130,204 +155,10 @@ public class IncAdmFuncionario extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(234, 55, 100, 2);
 		contentPane.add(separator_1);
-		//contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNombre, txtLogin, pwdClave, comboBox_1, comboBox, btnGuardarUsuario}));
+		
+		ToolBarMenu menu = new ToolBarMenu();
+		setJMenuBar(menu.getToolbarMenu());
 		
 		
-		JMenuBar menu = new JMenuBar();
-		
-		JMenu archivo         = new JMenu("File");
-		JMenu cadastro        = new JMenu("Cadastro");
-		JMenu configuraciones = new JMenu("Configuraciones");
-		JMenu controlMensual  = new JMenu("Control Mensual");
-		
-		JMenuItem logout = new JMenuItem("Cambiar Utilizador");
-		JMenuItem salir  = new JMenuItem("Cerrar Aplicacion");
-		
-		JMenuItem nuevoUsr    = new JMenuItem("Nuevo Usuario");
-		JMenuItem editUsr     = new JMenuItem("Editar Usuario");
-		JMenuItem exclUsr     = new JMenuItem("Excluir Usuario");
-		
-		JMenuItem nuevaCategoria = new JMenuItem("Nueva Categoria");
-		JMenuItem editaCategoria = new JMenuItem("Editar Categoria");
-		JMenuItem excluCategoria = new JMenuItem("Excluir Categoria");
-		JMenuItem sueldo         = new JMenuItem("Sueldo de Los Usuarios");
-		JMenuItem perfiles       = new JMenuItem("Perfiles Usuarios");
-		JMenuItem permisiones    = new JMenuItem("Permissiones");
-		
-		JMenuItem cierreMensual  = new JMenuItem("Cierre del Mes");
-		JMenuItem pasadoMensual  = new JMenuItem("Cierres Pasados");
-		
-		archivo.add(logout);
-		archivo.add(salir);
-		
-		cadastro.add(nuevoUsr);
-		cadastro.add(editUsr);
-		cadastro.add(exclUsr);
-		
-		configuraciones.add(nuevaCategoria);
-		configuraciones.add(editaCategoria);
-		configuraciones.add(excluCategoria);
-		configuraciones.add(sueldo);
-		configuraciones.add(perfiles);
-		configuraciones.add(permisiones);
-		
-		controlMensual.add(cierreMensual);
-		controlMensual.add(pasadoMensual);
-		
-		menu.add(archivo);
-		menu.add(cadastro);
-		menu.add(configuraciones);
-		menu.add(controlMensual);
-		
-		setJMenuBar(menu);
-		
-		/**
-		 * Ación de los menus del ARCHIVO
-		 */
-		logout.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				int option = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres quitar la sesiòn?", "", JOptionPane.YES_NO_OPTION);
-				if(option == JOptionPane.YES_OPTION) {
-					IniciarSession login = new IniciarSession();
-					login.setVisible(true);
-					dispose();
-				}
-			}
-		});
-		
-		salir.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				int option = JOptionPane.showConfirmDialog(null, "¿Cerrar la aplicaciòn?", "Eligir", JOptionPane.YES_NO_OPTION);
-				if(option == JOptionPane.YES_OPTION) {
-					dispose();
-				}
-			}
-		});
-		
-		/**
-		 * Aciòn de los menus del CADASTRO
-		 */
-		nuevoUsr.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				IncAdmFuncionario pantIncFuncionario = new IncAdmFuncionario();
-				pantIncFuncionario.setVisible(true);
-				dispose();
-			}
-		});
-		editUsr.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				EdtAdmFuncionario pantEdtFuncionario = new EdtAdmFuncionario();
-				pantEdtFuncionario.setVisible(true);
-				dispose();
-			}
-		});
-		exclUsr.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				ExclAdmFuncionario pantExclFuncionario = new ExclAdmFuncionario();
-				pantExclFuncionario.setVisible(true);
-				dispose();
-			}
-		});
-		/**
-		 * Ación de los menus de las CATEGORIAS
-		 */
-		nuevaCategoria.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				IncAdmCategoria pantIncCategoria = new IncAdmCategoria();
-				pantIncCategoria.setVisible(true);
-				dispose();
-			}
-		});
-		editaCategoria.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				EdtAdmCategoria pantEdtCategoria = new EdtAdmCategoria();
-				pantEdtCategoria.setVisible(true);
-				dispose();
-			}
-		});
-		excluCategoria.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				ExclAdmCategoria pantExclCategoria = new ExclAdmCategoria();
-				pantExclCategoria.setVisible(true);
-				dispose();
-			}
-		});
-		sueldo.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				SueldoAdmCategoria pantSueldoCategoria = new SueldoAdmCategoria();
-				pantSueldoCategoria.setVisible(true);
-				dispose();
-			}
-		});
-		permisiones.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				PermisAdmCategoria pantPermisCategoria = new PermisAdmCategoria();
-				pantPermisCategoria.setVisible(true);
-				dispose();
-			}
-		});
-		perfiles.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				PerfileAdmCategoria pantPerfileCategoria = new PerfileAdmCategoria();
-				pantPerfileCategoria.setVisible(true);
-				dispose();
-			}
-		});
-		/**
-		 * Ación del menu CONTROL MENSUAL
-		 */
-		cierreMensual.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				CierreAdmControlMensual pantCierreControlMensual = new CierreAdmControlMensual();
-				pantCierreControlMensual.setVisible(true);
-				dispose();
-			}
-		});
-		pasadoMensual.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				PasadoAdmControlMensual pantPstCtrlMensual = new PasadoAdmControlMensual();
-				pantPstCtrlMensual.setVisible(true);
-				dispose();
-			}
-		});
 	}
 }

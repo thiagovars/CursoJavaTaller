@@ -38,8 +38,8 @@ public class Usuarios {
 		return usrLogado;
 	}
 	
-	public boolean save(String nombre, String login, String categoria) {
+	public boolean save(String nombre, String login, String passw, String categoria) {
 		Categorias categorias = new Categorias();
-		return conn.saveUsuario(nombre, login, categorias.getCodigoByName(categoria));
+		return conn.saveUsuario(nombre, login, passw, categorias.getCodigoByName(categoria));
 	}
 }

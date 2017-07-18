@@ -2,13 +2,13 @@ package com.ght.conexion;
 import java.sql.*;
 
 public class ConnDAO {
-	private final String base   = "bra_ght";
-	private final String usr    = "root";
-	private final String passw  = "";
-	private final String host   = "jdbc:mysql://localhost/"+base;
-	private Connection connect  = null;
-	private Statement statement = null;
-	private ResultSet result    = null;
+	protected final String base   = "bra_ght";
+	protected final String usr    = "root";
+	protected final String passw  = "";
+	protected final String host   = "jdbc:mysql://localhost/"+base;
+	protected Connection connect  = null;
+	protected Statement statement = null;
+	protected ResultSet result    = null;
 	
 	public ConnDAO() {
 		try {
@@ -31,7 +31,15 @@ public class ConnDAO {
 		return null;
 	}
 	
-	public int insere(String query) {
-		
+	public boolean insere(String query) {
+		try {
+			System.out.println("Teste aceitacao");
+			PreparedStatement psm = connect.prepareStatement(query);
+			psm.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
 	}
 }

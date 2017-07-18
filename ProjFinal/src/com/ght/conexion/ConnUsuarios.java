@@ -1,9 +1,10 @@
 package com.ght.conexion;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-public class ConnUsuarios {
+public class ConnUsuarios extends ConnDAO {
 
 	private ConnDAO conn;
 	
@@ -15,7 +16,7 @@ public class ConnUsuarios {
 		Object[] retorno = new String[2];
 		String query = "SELECT nombre, tipo FROM usuarios WHERE nombre LIKE '%"+nombre+"%' AND passw = '"+passw+"'";
 		try {
-			ResultSet result = conn.buscar(query);
+			ResultSet result = ((ConnDAO) connect).buscar(query);
 			result.next();
 			retorno[0] = result.getString("nombre");
 			retorno[1] = result.getString("tipo");
@@ -27,11 +28,25 @@ public class ConnUsuarios {
 		return retorno;
 	}
 	
-	public boolean saveUsuario() {
+	/**
+	 * Metodo que escribe sql para que la classe
+	 * de conexión efectivamente lo grabe en la base.
+	 * @return true or false
+	 */
+	public boolean saveUsuario(String nombre, String login, String passw, int categoria) {
 		//TO DO: considerar herança para objetos de conexão.
-		String query = "INSERT INTO USUARIOS";
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 1);
+		SimpleDateFormat formatDate = new SimpleDateFormat("YYYY-MM-dd");
+		String creacion = formatDate.format(calendar.getTime());
+		String query = "INSERT INTO USUARIO (creacion, nombre, login, passw, codCategoria) VALUES " +
+				"('"+creacion+"', '"+
+				    nombre+"', '"+
+				    login+"', '"+
+				    passw+"', "+
+				    categoria+")";
 		try {
-			conn.insere(query);
+			return ((ConnDAO) connect).insere(query);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
