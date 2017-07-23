@@ -1,5 +1,6 @@
 package com.ght.conexion;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,14 +13,16 @@ public class ConnUsuarios extends ConnDAO {
 		this.conn = new ConnDAO();
 	}
 	
-	public Object[] iniciarSession(String nombre, String passw){
-		Object[] retorno = new String[2];
-		String query = "SELECT nombre, tipo FROM usuarios WHERE nombre LIKE '%"+nombre+"%' AND passw = '"+passw+"'";
+	public Object[] iniciarSession(String login, String passw){
+		Object[] retorno = new String[4];
+		String query = "SELECT login, passw, nombre, codCategoria FROM usuario WHERE login = '"+login+"' AND passw = '"+passw+"'";
 		try {
-			ResultSet result = ((ConnDAO) connect).buscar(query);
+			ResultSet result = this.conn.buscar(query);
 			result.next();
-			retorno[0] = result.getString("nombre");
-			retorno[1] = result.getString("tipo");
+			retorno[0] = result.getString("login");
+			retorno[1] = result.getString("passw");
+			retorno[2] = result.getString("nombre");
+			retorno[3] = result.getString("codCategoria");
 			result.close();
 			return retorno;
 		} catch (Exception e) {
@@ -34,7 +37,6 @@ public class ConnUsuarios extends ConnDAO {
 	 * @return true or false
 	 */
 	public boolean saveUsuario(String nombre, String login, String passw, int categoria) {
-		//TO DO: considerar herança para objetos de conexão.
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DATE, 1);
 		SimpleDateFormat formatDate = new SimpleDateFormat("YYYY-MM-dd");
@@ -46,7 +48,47 @@ public class ConnUsuarios extends ConnDAO {
 				    passw+"', "+
 				    categoria+")";
 		try {
-			return ((ConnDAO) connect).insere(query);
+			return this.conn.insere(query);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	public Object[][] getListadoUsuarios(String busqueda){
+		int registros = 0;
+		String queryUsrs = "SELECT codigo, nombre, login FROM usuario";
+		String totalRegistros = "SELECT count(*) as cantidad FROM usuario";
+		try {
+			ResultSet result = conn.buscar(totalRegistros);
+			result.next();
+			registros = result.getInt("cantidad");
+			result.close();
+		} catch (Exception e) {
+			System.out.println("No se ha podido recuperar registros: " + e.getMessage());
+		}
+		
+		Object[][] usuarios = new String[registros][3];
+		try {
+			ResultSet result = conn.buscar(queryUsrs);
+			int indice = 0;
+			while (result.next()) {
+				usuarios[indice][0] = result.getString("codigo");
+				usuarios[indice][1] = result.getString("nombre");
+				usuarios[indice][2] = result.getString("login");
+				indice++;
+			}
+			result.close();
+		} catch (Exception e) {
+			System.out.println("Imposible recuperar registros: "+e.getMessage());
+		}
+		return usuarios;
+	}
+	
+	public boolean excluir(String codigo){
+		String query = "DELETE FROM usuario WHERE codigo = " + codigo;
+		try {
+			return conn.excluir(query);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

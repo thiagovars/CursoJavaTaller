@@ -32,4 +32,8 @@ public class Categorias {
 	public int getCodigoByName(String nombre) {
 		return conn.getCodigoByName(nombre);
 	}
+	
+	public String getNameByCodigo(String codigo) {
+		return conn.getNameByCodigo(codigo);
+	}
 }

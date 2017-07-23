@@ -1,0 +1,57 @@
+Tamanho e texto de cabeçalho de cada tela
+-6 Título para cada página: (GHT - título da tela)  
++-4	login
++-4	inclusão de usuário
+-4	lista de usuários cadastrados (administrador) com busca
+-1		edição de usuário
++-1		exclusão de usuário
+-4	
+
+Adicionar menu cadastro no main do adminsitrador para listar usuários cadastrados.
+-4	mudança de senha de usuário
+-4	ativação ou inativação de usuário
+-4	controle de sessão
+-4	usuário logado e variáveis de sessão
+-	A tela de usuários não está fechando o programa
+
++Exclusão de menus que não serão utilizados em cada uma das telas
+
+Tela de usuário normal
+
+Tela de configurações
+
+Tela de apontamentos
+
+Tela de processamento mensal
+
++Fazer logar no sistema
+
+Funcionalidades de cada usuário
+
+!- Exportar banco e versionar no git
+	exportar o banco com os inserts para segunda usar no taller. --- antes de segunda
+
+Planejar tabela temporária para usuário ativo
+
+.-Erro de conexão em senha no banco no usuário root
+
+Comerçar parte escrita do programa
+-2	pedir ajuda para amor traduzir toda a UI.
+
+PARA O FIM DE SEMANA
+-3	LISTAR USUÁRIOS
++-2		fazer o método que irá preencher os objetos com as listas de usuários
+-2		busca dos usuários com parâmetros
+.!-4		fazer a lista receber um botão/checkbox
+-2		botão que irá excluir regsitros (será prompt?)
+-2		editar usuário direto na tabela
+-3	CRUD COMPLETO PARA USUÁRIOS
+		+-2 cadastro
+		-2 edição
+		+-2 exclusão
+		+-2 leitura
++-3	LOGIN RECONHECENDO O TIPO DE USUÁRIO
+		+-2 reconhecer usuário
+		+-2 levantar a main frame correspondente
+
+PARA AGORA A NOITE DURANTE A SEMANA

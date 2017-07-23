@@ -133,7 +133,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				IncAdmFuncionario pantIncFuncionario = new IncAdmFuncionario();
 				pantIncFuncionario.setVisible(true);
-				dispose();
 			}
 		});
 		editUsr.addActionListener(new ActionListener() {
