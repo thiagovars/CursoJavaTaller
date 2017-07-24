@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Jul-2017 às 02:25
+-- Generation Time: 24-Jul-2017 às 19:33
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -20,10 +20,6 @@ SET time_zone = "+00:00";
 -- Database: `bra_ght`
 --
 
-CREATE DATABASE IF NOT EXISTS BRA_GHT;
-
-USE BRA_GHT;
-
 -- --------------------------------------------------------
 
 --
@@ -34,9 +30,20 @@ CREATE TABLE `categoria` (
   `codigo` int(100) NOT NULL,
   `creacion` date NOT NULL,
   `modificacion` date DEFAULT NULL,
+  `nombre` varchar(200) NOT NULL,
   `tipo` char(1) NOT NULL,
   `codConfig` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+INSERT INTO `categoria` (`codigo`, `creacion`, `modificacion`, `nombre`, `tipo`, `codConfig`) VALUES
+(1, '2017-07-07', NULL, 'ADMINISTRADOR', 'A', 1),
+(2, '2017-07-07', NULL, 'GESTOR', 'U', 4),
+(3, '2017-07-07', NULL, 'FUNCIONARIO', 'F', 3),
+(4, '2017-07-07', NULL, 'USUARIO', 'U', 2);
 
 -- --------------------------------------------------------
 
@@ -52,6 +59,16 @@ CREATE TABLE `configuracion` (
   `edt` char(1) DEFAULT NULL,
   `del` char(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `configuracion`
+--
+
+INSERT INTO `configuracion` (`codigo`, `creacion`, `modificacion`, `crc`, `edt`, `del`) VALUES
+(1, '2017-07-07', NULL, 'S', 'S', 'S'),
+(2, '2017-07-07', NULL, 'N', 'N', 'N'),
+(3, '2017-07-07', NULL, 'S', 'S', 'N'),
+(4, '2017-07-07', NULL, 'N', 'S', 'S');
 
 -- --------------------------------------------------------
 
@@ -93,9 +110,18 @@ CREATE TABLE `usuario` (
   `creacion` date NOT NULL,
   `modificacion` date DEFAULT NULL,
   `nombre` varchar(200) NOT NULL,
+  `login` varchar(100) NOT NULL,
   `passw` varchar(64) NOT NULL,
   `codCategoria` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`codigo`, `creacion`, `modificacion`, `nombre`, `login`, `passw`, `codCategoria`) VALUES
+(1, '2017-07-20', NULL, 'Mariana Gerali', 'mariana', '12345', 2),
+(2, '2017-07-20', NULL, 'Pedro Silveira', 'pedro', '12345', 1),
 
 --
 -- Indexes for dumped tables
@@ -143,12 +169,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `configuracion`
 --
 ALTER TABLE `configuracion`
-  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `controlmensual`
 --
@@ -163,7 +189,7 @@ ALTER TABLE `horarios`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
