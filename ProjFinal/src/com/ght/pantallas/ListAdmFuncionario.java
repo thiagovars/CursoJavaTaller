@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -62,11 +63,7 @@ public class ListAdmFuncionario extends JFrame {
 		 * Titulo de la pantalla
 		 */
 		setTitle("GHT - Listado de usuarios");
-		
-		sclUsuarios = new JScrollPane(listarUsuarios());
-		sclUsuarios.setViewportBorder(UIManager.getBorder("ScrollPane.border"));
-		sclUsuarios.setBounds(0, 117, 645, 245);
-		contentPane.add(sclUsuarios);
+		listarUsuarios();
 		
 		JLabel lblListadoDeUsuarios = new JLabel("Listado de usuarios");
 		lblListadoDeUsuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -102,21 +99,29 @@ public class ListAdmFuncionario extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(486, 74, 71, 25);
+		btnBuscar.setBounds(488, 74, 84, 25);
 		contentPane.add(btnBuscar);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ExclAdmFuncionario pantExcluir = new ExclAdmFuncionario();
-				pantExcluir.setVisible(true);
+				Usuarios usuario = new Usuarios();
+				String codigo = JOptionPane.showInputDialog("codigo del usuario para excluir");
+				if(usuario.excluir(codigo) && !codigo.equals("")) {
+					JOptionPane.showMessageDialog(null, "Usuario excluir con exito");
+					contentPane.remove(sclUsuarios);
+					listarUsuarios();
+				} else {
+					JOptionPane.showMessageDialog(null, "No fue posible excluir usuario");
+				}
 			}
 		});
-		btnExcluir.setBounds(576, 74, 71, 25);
+		btnExcluir.setBounds(589, 74, 84, 25);
 		contentPane.add(btnExcluir);
 	}
 	
-	public JTable listarUsuarios() {
+	public void listarUsuarios() {
+
 		String[] column = {"codigo", "nombre", "login"};
 		Usuarios usuarios = new Usuarios();
 		Object[][] usrs = usuarios.getListadoUsuarios();
@@ -130,6 +135,11 @@ public class ListAdmFuncionario extends JFrame {
 		table.getColumnModel().getColumn(0).setPreferredWidth(45);
 		table.getColumnModel().getColumn(1).setPreferredWidth(500);
 		table.getColumnModel().getColumn(2).setPreferredWidth(80);
-		return table;
+		sclUsuarios = new JScrollPane(table);
+		sclUsuarios.setViewportBorder(UIManager.getBorder("ScrollPane.border"));
+		sclUsuarios.setBounds(0, 117, 685, 245);
+		contentPane.add(sclUsuarios);
+		
+		
 	}
 }

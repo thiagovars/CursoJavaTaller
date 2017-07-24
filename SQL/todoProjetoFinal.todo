@@ -3,6 +3,7 @@ Tamanho e texto de cabeçalho de cada tela
 +-4	login
 +-4	inclusão de usuário
 -4	lista de usuários cadastrados (administrador) com busca
+-1		busca
 -1		edição de usuário
 +-1		exclusão de usuário
 -4	
