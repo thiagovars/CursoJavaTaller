@@ -1,7 +1,0 @@
-package com.ght.classes;
-
-public class ToolMenu {
-
-	private JMenuBar menu;
-	
-}

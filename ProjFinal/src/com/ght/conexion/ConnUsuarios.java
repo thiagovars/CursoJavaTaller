@@ -58,6 +58,9 @@ public class ConnUsuarios extends ConnDAO {
 	public Object[][] getListadoUsuarios(String busqueda){
 		int registros = 0;
 		String queryUsrs = "SELECT codigo, nombre, login FROM usuario";
+		if(!busqueda.equals("")) {
+			queryUsrs += "WHERE " + busqueda;
+		}
 		String totalRegistros = "SELECT count(*) as cantidad FROM usuario";
 		try {
 			ResultSet result = conn.buscar(totalRegistros);

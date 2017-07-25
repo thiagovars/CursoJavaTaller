@@ -121,7 +121,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`codigo`, `creacion`, `modificacion`, `nombre`, `login`, `passw`, `codCategoria`) VALUES
 (1, '2017-07-20', NULL, 'Mariana Gerali', 'mariana', '12345', 2),
-(2, '2017-07-20', NULL, 'Pedro Silveira', 'pedro', '12345', 1),
+(2, '2017-07-20', NULL, 'Pedro Silveira', 'pedro', '12345', 1);
 
 --
 -- Indexes for dumped tables

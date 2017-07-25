@@ -4,12 +4,17 @@
 		<item value="1025" key="dialogWidth"/>
 		<item value="523" key="dialogHeight"/>
 		<list key="orderedProviders">
+			<item value="org.eclipse.ui.actions"/>
 		</list>
 		<list key="textArray">
+			<item value="commen"/>
+			<item value="comment"/>
 		</list>
 		<list key="orderedElements">
+			<item value="org.eclipse.jdt.ui.actions.ToggleComment"/>
 		</list>
 		<list key="textEntries">
+			<item value="2"/>
 		</list>
 	</section>
 	<section name="WorkbenchPreferenceDialogSettings">
