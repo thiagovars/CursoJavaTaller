@@ -102,7 +102,7 @@ public class IniciarSession extends JFrame {
 							pantAdm.setVisible(true);
 							break;
 						case "F":
-							MainFuncionarioFrame pantFunc = new MainFuncionarioFrame();
+							MainUsuarioFrame pantFunc = new MainUsuarioFrame();
 							pantFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
 							pantFunc.setVisible(true);
 							break;

@@ -36,7 +36,21 @@ public class ConnCategoria {
 	}
 	
 	public String getNameByCodigo(String codigo) {
+		String query = "SELECT nombre FROM CATEGORIA WHERE codigo = '"+codigo+"'";
+		System.out.println(query);
+		try {
+			ResultSet result = conn.buscar(query);
+			result.next();
+			return result.getString("nombre");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "";
+	}
+	
+	public String getTipoByCodigo(String codigo) {
 		String query = "SELECT tipo FROM CATEGORIA WHERE codigo = '"+codigo+"'";
+		System.out.println(query);
 		try {
 			ResultSet result = conn.buscar(query);
 			result.next();

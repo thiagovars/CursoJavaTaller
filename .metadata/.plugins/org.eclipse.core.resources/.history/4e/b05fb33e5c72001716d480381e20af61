@@ -1,0 +1,5 @@
+package com.ght.classes;
+
+public enum TipoUsuario {
+	SELECIONE, ADMINISTRADOR, FUNCIONARIO, GESTOR
+}

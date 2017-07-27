@@ -3,10 +3,13 @@ Tamanho e texto de cabeçalho de cada tela
 +-4	login
 +-4	inclusão de usuário
 -4	lista de usuários cadastrados (administrador) com busca
--1		busca
++-1		busca
 -1		edição de usuário
 +-1		exclusão de usuário
 -4	
+
+Adicionar icones para acoes do programa
+-4	https://www.iconfinder.com/iconsets/font-awesome
 
 Adicionar menu cadastro no main do adminsitrador para listar usuários cadastrados.
 -4	mudança de senha de usuário
@@ -29,7 +32,7 @@ Tela de processamento mensal
 
 Funcionalidades de cada usuário
 
-!- Exportar banco e versionar no git
++!- Exportar banco e versionar no git
 	exportar o banco com os inserts para segunda usar no taller. --- antes de segunda
 
 Planejar tabela temporária para usuário ativo

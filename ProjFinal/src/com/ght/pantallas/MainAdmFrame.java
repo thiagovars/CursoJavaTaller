@@ -56,9 +56,8 @@ public class MainAdmFrame extends JFrame {
 		JMenuItem logout = new JMenuItem("Cambiar Utilizador");
 		JMenuItem salir  = new JMenuItem("Cerrar Aplicacion");
 		
-		JMenuItem nuevoUsr    = new JMenuItem("Nuevo Usuario");
-		JMenuItem editUsr     = new JMenuItem("Editar Usuario");
-		JMenuItem exclUsr     = new JMenuItem("Excluir Usuario");
+		JMenuItem nuevoUsr     = new JMenuItem("Nuevo Usuario");
+		JMenuItem listUsuarios = new JMenuItem("Listar Usuarios");
 		
 		JMenuItem nuevaCategoria = new JMenuItem("Nueva Categoria");
 		JMenuItem editaCategoria = new JMenuItem("Editar Categoria");
@@ -74,8 +73,7 @@ public class MainAdmFrame extends JFrame {
 		archivo.add(salir);
 		
 		cadastro.add(nuevoUsr);
-		cadastro.add(editUsr);
-		cadastro.add(exclUsr);
+		cadastro.add(listUsuarios);
 		
 		configuraciones.add(nuevaCategoria);
 		configuraciones.add(editaCategoria);
@@ -118,7 +116,7 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				int option = JOptionPane.showConfirmDialog(null, "¿Cerrar la aplicaciòn?", "Eligir", JOptionPane.YES_NO_OPTION);
 				if(option == JOptionPane.YES_OPTION) {
-					dispose();
+					System.exit(0);
 				}
 			}
 		});
@@ -131,28 +129,17 @@ public class MainAdmFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				IncAdmFuncionario pantIncFuncionario = new IncAdmFuncionario();
-				pantIncFuncionario.setVisible(true);
+				IncAdmUsuario pantIncUsuario = new IncAdmUsuario();
+				pantIncUsuario.setVisible(true);
 			}
 		});
-		editUsr.addActionListener(new ActionListener() {
+		listUsuarios.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				EdtAdmFuncionario pantEdtFuncionario = new EdtAdmFuncionario();
-				pantEdtFuncionario.setVisible(true);
-				dispose();
-			}
-		});
-		exclUsr.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				ExclAdmFuncionario pantExclFuncionario = new ExclAdmFuncionario();
-				pantExclFuncionario.setVisible(true);
-				dispose();
+				ListAdmUsuario pantListUsuario = new ListAdmUsuario();
+				pantListUsuario.setVisible(true);
 			}
 		});
 		/**
@@ -165,7 +152,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				IncAdmCategoria pantIncCategoria = new IncAdmCategoria();
 				pantIncCategoria.setVisible(true);
-				dispose();
 			}
 		});
 		editaCategoria.addActionListener(new ActionListener() {
@@ -175,7 +161,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				EdtAdmCategoria pantEdtCategoria = new EdtAdmCategoria();
 				pantEdtCategoria.setVisible(true);
-				dispose();
 			}
 		});
 		excluCategoria.addActionListener(new ActionListener() {
@@ -185,7 +170,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				ExclAdmCategoria pantExclCategoria = new ExclAdmCategoria();
 				pantExclCategoria.setVisible(true);
-				dispose();
 			}
 		});
 		sueldo.addActionListener(new ActionListener() {
@@ -195,7 +179,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				SueldoAdmCategoria pantSueldoCategoria = new SueldoAdmCategoria();
 				pantSueldoCategoria.setVisible(true);
-				dispose();
 			}
 		});
 		permisiones.addActionListener(new ActionListener() {
@@ -205,7 +188,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				PermisAdmCategoria pantPermisCategoria = new PermisAdmCategoria();
 				pantPermisCategoria.setVisible(true);
-				dispose();
 			}
 		});
 		perfiles.addActionListener(new ActionListener() {
@@ -215,7 +197,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				PerfileAdmCategoria pantPerfileCategoria = new PerfileAdmCategoria();
 				pantPerfileCategoria.setVisible(true);
-				dispose();
 			}
 		});
 		/**
@@ -228,7 +209,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				CierreAdmControlMensual pantCierreControlMensual = new CierreAdmControlMensual();
 				pantCierreControlMensual.setVisible(true);
-				dispose();
 			}
 		});
 		pasadoMensual.addActionListener(new ActionListener() {
@@ -238,7 +218,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				PasadoAdmControlMensual pantPstCtrlMensual = new PasadoAdmControlMensual();
 				pantPstCtrlMensual.setVisible(true);
-				dispose();
 			}
 		});
 	}
