@@ -93,7 +93,7 @@ public class ConnUsuarios extends ConnDAO {
 	}
 	
 	public Object[] getUsuario(String codigo) {
-		Object[] usuario = new String[4];
+		Object[] usuario = new String[5];
 		String query = "SELECT codigo, nombre, login, passw, codCategoria FROM usuario WHERE codigo = " + codigo;
 		try {
 			ResultSet result = conn.buscar(query);
@@ -101,7 +101,8 @@ public class ConnUsuarios extends ConnDAO {
 			usuario[0] = result.getString("codigo");
 			usuario[1] = result.getString("nombre");
 			usuario[2] = result.getString("login");
-			usuario[3] = result.getString("codCategoria");
+			usuario[3] = result.getString("passw");
+			usuario[4] = result.getString("codCategoria");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

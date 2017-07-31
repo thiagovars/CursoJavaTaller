@@ -13,7 +13,7 @@ public class Usuarios {
 	private String nombre;
 	private String login;
 	private String clave;
-	private int codCategoria;
+	private String codCategoria;
 	
 	public Usuarios() {
 		this.conn = new ConnUsuarios();
@@ -82,11 +82,11 @@ public class Usuarios {
 		this.clave = clave;
 	}
 
-	public int getCodCategoria() {
+	public String getCodCategoria() {
 		return codCategoria;
 	}
 
-	public void setCodCategoria(int codCategoria) {
+	public void setCodCategoria(String codCategoria) {
 		this.codCategoria = codCategoria;
 	}
 
@@ -102,7 +102,7 @@ public class Usuarios {
 		this.nombre = objectUsuarios[1].toString();
 		this.login  = objectUsuarios[2].toString();
 		this.clave  = objectUsuarios[3].toString();
-		this.codCategoria = (int)objectUsuarios[4];
+		this.codCategoria = objectUsuarios[4].toString();
 	}
 	
 	public Object[][] getListadoUsuarios(Object[] busqueda) {

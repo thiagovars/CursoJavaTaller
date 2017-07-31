@@ -7,6 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
@@ -27,11 +28,6 @@ public class EdtAdmUsuario extends JFrame {
 	private JTextField txtLogin;
 	private JPasswordField paswClave;
 	
-	public EdtAdmUsuario(String codigo) {
-		this.codigo = codigo;
-		this.main(null);
-	}
-
 	/**
 	 * Launch the application.
 	 */
@@ -125,11 +121,8 @@ public class EdtAdmUsuario extends JFrame {
 	}
 	
 	public void llenarCampos(){
-		Usuarios usr = new Usuarios(getCodigo());
-		System.out.println(usr.getNombre());
-	}
-	
-	public String getCodigo(){
-		return this.codigo;
+		String codigo = JOptionPane.showInputDialog("Codigo del usuario para editarlo");
+		Usuarios usr = new Usuarios(codigo);
+		
 	}
 }

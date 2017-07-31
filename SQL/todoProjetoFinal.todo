@@ -5,6 +5,8 @@ Tamanho e texto de cabeçalho de cada tela
 -4	lista de usuários cadastrados (administrador) com busca
 +-1		busca
 -1		edição de usuário
+-2			clicar no botão do usuario abre uma janela para escolher o usuário a ser editado
+-2			ou passar parâmetro para a janela ou fazer a janela mostrar uma janela
 +-1		exclusão de usuário
 
 Adicionar icones para acoes do programa
@@ -18,6 +20,12 @@ Adicionar menu cadastro no main do adminsitrador para listar usuários cadastrad
 -	A tela de usuários não está fechando o programa
 
 +Exclusão de menus que não serão utilizados em cada uma das telas
+
+Tela de lista de usuario
+-4	campos de busca
+-4	listagem completa dos usuários (codigo, nome, login e categoria)
+-4	botões de editar e excluir usuário.
+-2		edição: preencher campos do formulário.
 
 Tela de funcionário
 -4	relatório mensal
@@ -62,12 +70,15 @@ PARA O FIM DE SEMANA
 -3	LISTAR USUÁRIOS
 +-2		fazer o método que irá preencher os objetos com as listas de usuários
 +-2		busca dos usuários com parâmetros
-!-4		fazer a lista receber um botão/checkbox
+.!-4		fazer a lista receber um botão/checkbox
 +-2		botão que irá excluir regsitros (será prompt?)
--2		editar usuário direto na tabela (botão quer irá setar uma senha temporária)
+.-2		editar usuário direto na tabela (botão quer irá setar uma senha temporária)
 -3	CRUD COMPLETO PARA USUÁRIOS
-		-2 edição
+-2 		edição
++-2		tela
+-2		botão que irá salvar no banco as alterações
+-2		
 
 PARA AGORA A NOITE DURANTE A SEMANA
--3	INSERIR BOTÕES DENTRO DA TABELA COM AÇÃO PARA CADA USUÁRIO
++-3	INSERIR BOTÕES DENTRO DA TABELA COM AÇÃO PARA CADA USUÁRIO
 -3	COMEÇAR TELA DE CONFIGURAÇÕES

@@ -150,13 +150,8 @@ public class ListAdmUsuario extends JFrame {
 		JButton btnEditar = new JButton("");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String codigo = JOptionPane.showInputDialog("codigo del usuario para editar");
-				Usuarios usr = new Usuarios();
-				if(usr.isUsr(codigo)) {
-					EdtAdmUsuario pantEdtUsuario = new EdtAdmUsuario(codigo);
-				} else {
-					JOptionPane.showMessageDialog(null, "Ese usuario no encontrado!");
-				}
+				EdtAdmUsuario pantEdtUsuario = new EdtAdmUsuario();
+				pantEdtUsuario.setVisible(true);
 			}
 		});
 		btnEditar.setIcon(new ImageIcon("C:\\Users\\Thiago\\Documents\\Taller de Informatica\\CursoJavaTaller\\ProjFinal\\Imagenes\\edit.png"));
