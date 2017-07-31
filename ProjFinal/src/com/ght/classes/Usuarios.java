@@ -8,8 +8,20 @@ public class Usuarios {
 	private String tipoUsuario;
 	private ConnUsuarios conn;
 	
+	// campos de la base de datos
+	private String codigo;
+	private String nombre;
+	private String login;
+	private String clave;
+	private int codCategoria;
+	
 	public Usuarios() {
 		this.conn = new ConnUsuarios();
+	}
+	
+	public Usuarios(String codigo) {
+		this.conn = new ConnUsuarios();
+		setObjectUsuario(codigo);
 	}
 	
 	public boolean iniciarSession(String login, String passw) {
@@ -38,9 +50,59 @@ public class Usuarios {
 		return usrLogado;
 	}
 	
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
+	public int getCodCategoria() {
+		return codCategoria;
+	}
+
+	public void setCodCategoria(int codCategoria) {
+		this.codCategoria = codCategoria;
+	}
+
 	public boolean save(String nombre, String login, String passw, String categoria) {
 		Categorias categorias = new Categorias();
 		return conn.saveUsuario(nombre, login, passw, categorias.getCodigoByName(categoria));
+	}
+	
+	public void setObjectUsuario(String codigo) {
+		System.out.println("codigo no setObject " + codigo);
+		Object[] objectUsuarios = conn.getUsuario(codigo);
+		this.codigo = objectUsuarios[0].toString();
+		this.nombre = objectUsuarios[1].toString();
+		this.login  = objectUsuarios[2].toString();
+		this.clave  = objectUsuarios[3].toString();
+		this.codCategoria = (int)objectUsuarios[4];
 	}
 	
 	public Object[][] getListadoUsuarios(Object[] busqueda) {
@@ -60,6 +122,7 @@ public class Usuarios {
 			}
 		}
 		Object[][] objectUsuarios = conn.getListadoUsuarios(campos);
+		
 		for (int i = 0; i < objectUsuarios.length; i++) {
 			objectUsuarios[i][3] = categorias.getNameByCodigo(objectUsuarios[i][3].toString());
 		}
@@ -68,5 +131,9 @@ public class Usuarios {
 	
 	public boolean excluir(String codigo) {
 		return conn.excluir(codigo);
+	}
+	
+	public boolean isUsr(String codigo) {
+		return conn.find(codigo);
 	}
 }

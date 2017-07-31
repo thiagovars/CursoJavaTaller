@@ -92,10 +92,38 @@ public class ConnUsuarios extends ConnDAO {
 		return usuarios;
 	}
 	
+	public Object[] getUsuario(String codigo) {
+		Object[] usuario = new String[4];
+		String query = "SELECT codigo, nombre, login, passw, codCategoria FROM usuario WHERE codigo = " + codigo;
+		try {
+			ResultSet result = conn.buscar(query);
+			result.next();
+			usuario[0] = result.getString("codigo");
+			usuario[1] = result.getString("nombre");
+			usuario[2] = result.getString("login");
+			usuario[3] = result.getString("codCategoria");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return usuario;
+	}
+	
 	public boolean excluir(String codigo){
 		String query = "DELETE FROM usuario WHERE codigo = " + codigo;
 		try {
 			return conn.excluir(query);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
+	public boolean find(String codigo) {
+		String query = "SELECT COUNT(1) AS CANTIDAD FROM usuario WHERE codigo = " + codigo;
+		try {
+			ResultSet result = conn.buscar(query);
+			result.next();
+			return result.getBoolean("CANTIDAD");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

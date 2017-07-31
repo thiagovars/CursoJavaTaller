@@ -25,6 +25,8 @@ import com.ght.classes.TipoUsuario;
 import com.ght.classes.Usuarios;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class ListAdmUsuario extends JFrame {
 
@@ -124,8 +126,11 @@ public class ListAdmUsuario extends JFrame {
 		
 		JButton btnExcluir = new JButton("");
 		btnExcluir.setToolTipText("Suprimir Usuario");
-		btnExcluir.setBackground(Color.WHITE);
-		btnExcluir.setIcon(new ImageIcon("C:\\Users\\JAVA\\Pedro\\images\\sup.png"));
+		btnExcluir.setOpaque(false);
+		btnExcluir.setBorder(null);
+		btnExcluir.setBorderPainted(false);
+		btnExcluir.setContentAreaFilled(false);
+		btnExcluir.setIcon(new ImageIcon("C:\\Users\\Thiago\\Documents\\Taller de Informatica\\CursoJavaTaller\\ProjFinal\\Imagenes\\eraser.png"));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Usuarios usuario = new Usuarios();
@@ -139,31 +144,42 @@ public class ListAdmUsuario extends JFrame {
 				}
 			}
 		});
-		btnExcluir.setBounds(36, 95, 18, 18);
+		btnExcluir.setBounds(36, 95, 24, 24);
 		contentPane.add(btnExcluir);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnEditar = new JButton("");
+		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				IncAdmUsuario pantIncUsuario = new IncAdmUsuario();
-				pantIncUsuario.setVisible(true);
+				String codigo = JOptionPane.showInputDialog("codigo del usuario para editar");
+				Usuarios usr = new Usuarios();
+				if(usr.isUsr(codigo)) {
+					EdtAdmUsuario pantEdtUsuario = new EdtAdmUsuario(codigo);
+				} else {
+					JOptionPane.showMessageDialog(null, "Ese usuario no encontrado!");
+				}
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\JAVA\\Pedro\\images\\plus.png"));
-		btnNewButton.setToolTipText("Agregar Usuario");
-		btnNewButton.setBounds(11, 95, 18, 18);
-		contentPane.add(btnNewButton);
+		btnEditar.setIcon(new ImageIcon("C:\\Users\\Thiago\\Documents\\Taller de Informatica\\CursoJavaTaller\\ProjFinal\\Imagenes\\edit.png"));
+		btnEditar.setToolTipText("Editar Usuario");
+		btnEditar.setOpaque(false);
+		btnEditar.setContentAreaFilled(false);
+		btnEditar.setBorderPainted(false);
+		btnEditar.setBorder(null);
+		btnEditar.setBounds(7, 95, 24, 24);
+		contentPane.add(btnEditar);
+		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNombre, txtLogin, cbxTipo, btnBuscar}));
 	}
 	
 	public void listarUsuarios() {
-		String[] column = {"codigo", "nombre", "login", "Categoria", "aciòn"};
+		String[] column = {"codigo", "nombre", "login", "Categoria"};
 		Usuarios usuarios = new Usuarios();
 		Object[][] usrs = usuarios.getListadoUsuarios(busqueda);
 		
 		table = new JTable();
+		table.setEnabled(false);
+		table.setFillsViewportHeight(true);
 		//table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBounds(10, 31, 444, 340);
-		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(usrs, column));
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(45);

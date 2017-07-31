@@ -37,7 +37,6 @@ public class ConnCategoria {
 	
 	public String getNameByCodigo(String codigo) {
 		String query = "SELECT nombre FROM CATEGORIA WHERE codigo = '"+codigo+"'";
-		System.out.println(query);
 		try {
 			ResultSet result = conn.buscar(query);
 			result.next();

@@ -6,7 +6,6 @@ Tamanho e texto de cabeçalho de cada tela
 +-1		busca
 -1		edição de usuário
 +-1		exclusão de usuário
--4	
 
 Adicionar icones para acoes do programa
 -4	https://www.iconfinder.com/iconsets/font-awesome
@@ -20,22 +19,39 @@ Adicionar menu cadastro no main do adminsitrador para listar usuários cadastrad
 
 +Exclusão de menus que não serão utilizados em cada uma das telas
 
-Tela de usuário normal
+Tela de funcionário
+-4	relatório mensal
+-4	mandar relatório (aprovação adminsitrador)
+-4	aceitar relatório mandar email com pdf (gestor)
+
+Tela do gestor
+-4	aprovação de horas
+-4	relatório por usuários
+-4	ativação ou inativação de usuários (exceto administradores)
 
 Tela de configurações
+-4	tipos de acesso
+-4	variáveis de sessão?
+-4	permissões
 
 Tela de apontamentos
+-4	cadastro de horas
+-4	descrição das tarefas do dia
+-4	usuário dono das horas
 
 Tela de processamento mensal
 
 +Fazer logar no sistema
 
 Funcionalidades de cada usuário
+-4	administrador: crud de usuários, configurações, senhas e variáveis de sessão
+-4	gestor: aprovação de horas, relatórios por usuários, ativação e inativação de usuários -administrador
+-4	funcionário: cadastro de horas, mandar relatórios, visualização dos meses de relatório
 
 +!- Exportar banco e versionar no git
 	exportar o banco com os inserts para segunda usar no taller. --- antes de segunda
 
-Planejar tabela temporária para usuário ativo
+.-Planejar tabela temporária para usuário ativo
 
 .-Erro de conexão em senha no banco no usuário root
 
@@ -45,19 +61,13 @@ Comerçar parte escrita do programa
 PARA O FIM DE SEMANA
 -3	LISTAR USUÁRIOS
 +-2		fazer o método que irá preencher os objetos com as listas de usuários
--2		busca dos usuários com parâmetros
-.!-4		fazer a lista receber um botão/checkbox
--2		botão que irá excluir regsitros (será prompt?)
--2		editar usuário direto na tabela
++-2		busca dos usuários com parâmetros
+!-4		fazer a lista receber um botão/checkbox
++-2		botão que irá excluir regsitros (será prompt?)
+-2		editar usuário direto na tabela (botão quer irá setar uma senha temporária)
 -3	CRUD COMPLETO PARA USUÁRIOS
-		+-2 cadastro
 		-2 edição
-		+-2 exclusão
-		+-2 leitura
-+-3	LOGIN RECONHECENDO O TIPO DE USUÁRIO
-		+-2 reconhecer usuário
-		+-2 levantar a main frame correspondente
 
 PARA AGORA A NOITE DURANTE A SEMANA
--3	IMPLEMENTAR BUSCA NOS USUARIOS
--4	LIMPAR TELAS QUE NAO SERAO UTILIZADAS
+-3	INSERIR BOTÕES DENTRO DA TABELA COM AÇÃO PARA CADA USUÁRIO
+-3	COMEÇAR TELA DE CONFIGURAÇÕES
