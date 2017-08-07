@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Jul-2017 às 19:33
+-- Generation Time: 07-Ago-2017 às 00:50
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -32,6 +32,7 @@ CREATE TABLE `categoria` (
   `modificacion` date DEFAULT NULL,
   `nombre` varchar(200) NOT NULL,
   `tipo` char(1) NOT NULL,
+  `valorHora` double NOT NULL,
   `codConfig` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -39,11 +40,11 @@ CREATE TABLE `categoria` (
 -- Extraindo dados da tabela `categoria`
 --
 
-INSERT INTO `categoria` (`codigo`, `creacion`, `modificacion`, `nombre`, `tipo`, `codConfig`) VALUES
-(1, '2017-07-07', NULL, 'ADMINISTRADOR', 'A', 1),
-(2, '2017-07-07', NULL, 'GESTOR', 'U', 4),
-(3, '2017-07-07', NULL, 'FUNCIONARIO', 'F', 3),
-(4, '2017-07-07', NULL, 'USUARIO', 'U', 2);
+INSERT INTO `categoria` (`codigo`, `creacion`, `modificacion`, `nombre`, `tipo`, `valorHora`, `codConfig`) VALUES
+(1, '2017-07-07', NULL, 'ADMINISTRADOR', 'A', 0, 1),
+(2, '2017-07-07', NULL, 'GESTOR', 'U', 0, 4),
+(3, '2017-07-07', NULL, 'FUNCIONARIO', 'F', 0, 3),
+(4, '2017-07-07', NULL, 'USUARIO', 'U', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -92,10 +93,11 @@ CREATE TABLE `controlmensual` (
 
 CREATE TABLE `horarios` (
   `codigo` int(100) NOT NULL,
-  `creacion` date NOT NULL,
-  `modificacion` date DEFAULT NULL,
-  `fechaHoraEntrada` datetime DEFAULT NULL,
-  `fechaHoraSalida` datetime DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `entrada` time NOT NULL,
+  `saida` time NOT NULL,
+  `descanso` time NOT NULL,
+  `total` time NOT NULL,
   `codUsuario` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -112,6 +114,7 @@ CREATE TABLE `usuario` (
   `nombre` varchar(200) NOT NULL,
   `login` varchar(100) NOT NULL,
   `passw` varchar(64) NOT NULL,
+  `valorHora` double NOT NULL,
   `codCategoria` int(100) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -119,9 +122,12 @@ CREATE TABLE `usuario` (
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`codigo`, `creacion`, `modificacion`, `nombre`, `login`, `passw`, `codCategoria`) VALUES
-(1, '2017-07-20', NULL, 'Mariana Gerali', 'mariana', '12345', 2),
-(2, '2017-07-20', NULL, 'Pedro Silveira', 'pedro', '12345', 1);
+INSERT INTO `usuario` (`codigo`, `creacion`, `modificacion`, `nombre`, `login`, `passw`, `valorHora`, `codCategoria`) VALUES
+(4, '2017-07-23', '2017-08-04', 'Mujica', 'marihuana', '1234', 0, 1),
+(5, '2017-07-23', '2017-08-07', 'Luiz Inacio Lula da Silva', 'lula', '1313', 0, 4),
+(7, '2017-08-03', NULL, 'Administrador', 'adm', 'root', 0, 1),
+(9, '2017-08-06', NULL, 'PEDRO SILVEIRA', 'pedro', 'ditech', 0, 3),
+(10, '2017-08-07', NULL, 'Manolo Pay', 'papa', 'chips', 0, 3);
 
 --
 -- Indexes for dumped tables
@@ -189,7 +195,7 @@ ALTER TABLE `horarios`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
