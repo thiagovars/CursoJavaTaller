@@ -77,9 +77,12 @@ public class HorasUsrRegistro extends JFrame {
 		lblMontoSueldo.setBounds(113, 87, 109, 16);
 		contentPane.add(lblMontoSueldo);
 		
-		JLabel lblMonto = new JLabel("0");
-		lblMonto.setBounds(234, 87, 163, 16);
-		contentPane.add(lblMonto);
+		JLabel lblValorHoras = new JLabel();
+		lblValorHoras.setText(String.valueOf(usuario.getValorHora()));
+		lblValorHoras.setForeground(new Color(0, 128, 128));
+		lblValorHoras.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblValorHoras.setBounds(234, 87, 163, 16);
+		contentPane.add(lblValorHoras);
 		
 		JLabel lblSueldoTotal = new JLabel("Sueldo Total");
 		lblSueldoTotal.setHorizontalAlignment(SwingConstants.RIGHT);
