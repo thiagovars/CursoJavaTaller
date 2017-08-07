@@ -1,6 +1,5 @@
 package com.ght.conexion;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,18 +14,18 @@ public class ConnUsuarios extends ConnDAO {
 	
 	public Object[] iniciarSession(String login, String passw){
 		Object[] retorno = new String[4];
-		String query = "SELECT login, passw, nombre, codCategoria FROM usuario WHERE login = '"+login+"' AND passw = '"+passw+"'";
+		String query = "SELECT codigo, nombre, valorHora, codCategoria FROM usuario WHERE login = '"+login+"' AND passw = '"+passw+"'";
 		try {
 			ResultSet result = this.conn.buscar(query);
 			result.next();
-			retorno[0] = result.getString("login");
-			retorno[1] = result.getString("passw");
-			retorno[2] = result.getString("nombre");
+			retorno[0] = result.getString("codigo");
+			retorno[1] = result.getString("nombre");
+			retorno[2] = result.getString("valorHora");
 			retorno[3] = result.getString("codCategoria");
 			result.close();
 			return retorno;
 		} catch (Exception e) {
-			System.out.println("No se ha podido validar usuario: " + e.getMessage());
+			System.out.println("No se ha podido validar usuario: " + e);
 		}
 		return retorno;
 	}
@@ -36,21 +35,43 @@ public class ConnUsuarios extends ConnDAO {
 	 * de conexión efectivamente lo grabe en la base.
 	 * @return true or false
 	 */
-	public boolean saveUsuario(String nombre, String login, String passw, int categoria) {
+	public boolean guardaUsuario(String nombre, String login, String passw, double valorHora, int categoria) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DATE, 1);
 		SimpleDateFormat formatDate = new SimpleDateFormat("YYYY-MM-dd");
 		String creacion = formatDate.format(calendar.getTime());
-		String query = "INSERT INTO USUARIO (creacion, nombre, login, passw, codCategoria) VALUES " +
+		String query = "INSERT INTO USUARIO (creacion, nombre, login, passw, valorHora, codCategoria) VALUES " +
 				"('"+creacion+"', '"+
 				    nombre+"', '"+
 				    login+"', '"+
 				    passw+"', "+
+				    valorHora+", "+
 				    categoria+")";
 		try {
 			return this.conn.insere(query);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e);
+		}
+		return false;
+	}
+	
+	public boolean actualizaUsuario(String nombre, String login, String passw, double valorHora, int categoria, String codigo) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, 1);
+		SimpleDateFormat formatDate = new SimpleDateFormat("YYYY-MM-dd");
+		String modificacion = formatDate.format(calendar.getTime());
+		String query = "UPDATE usuario set " +
+				"modificacion = '"+modificacion+"', "+
+				"nombre = '"+nombre+"', "+
+				"login = '"+login+"', "+
+				"passw = '"+passw+"', "+
+				"valorHora = " +valorHora+", "+ 
+				"codCategoria = '"+categoria+"' "+
+				"WHERE codigo = " + codigo;
+		try {
+			return this.conn.insere(query);
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 		return false;
 	}
@@ -60,6 +81,8 @@ public class ConnUsuarios extends ConnDAO {
 		String queryUsrs = "SELECT codigo, nombre, login, codCategoria FROM usuario";
 		if(!busqueda.equals("")) {
 			queryUsrs += " WHERE " + busqueda;
+		} else {
+			queryUsrs += " WHERE codigo > 0";
 		}
 		String totalRegistros = "SELECT count(*) as cantidad FROM usuario";
 		if(!busqueda.equals("")) {
@@ -71,7 +94,7 @@ public class ConnUsuarios extends ConnDAO {
 			registros = result.getInt("cantidad");
 			result.close();
 		} catch (Exception e) {
-			System.out.println("No se ha podido recuperar registros: " + e.getMessage());
+			System.out.println("No se ha podido recuperar registros: " + e);
 		}
 		
 		Object[][] usuarios = new String[registros][4];
@@ -87,14 +110,14 @@ public class ConnUsuarios extends ConnDAO {
 			}
 			result.close();
 		} catch (Exception e) {
-			System.out.println("Imposible recuperar registros: "+e.getMessage());
+			System.out.println("Imposible recuperar registros: "+e);
 		}
 		return usuarios;
 	}
 	
 	public Object[] getUsuario(String codigo) {
-		Object[] usuario = new String[5];
-		String query = "SELECT codigo, nombre, login, passw, codCategoria FROM usuario WHERE codigo = " + codigo;
+		Object[] usuario = new String[6];
+		String query = "SELECT codigo, nombre, login, passw, valorHora, codCategoria FROM usuario WHERE codigo = " + codigo;
 		try {
 			ResultSet result = conn.buscar(query);
 			result.next();
@@ -102,9 +125,10 @@ public class ConnUsuarios extends ConnDAO {
 			usuario[1] = result.getString("nombre");
 			usuario[2] = result.getString("login");
 			usuario[3] = result.getString("passw");
-			usuario[4] = result.getString("codCategoria");
+			usuario[4] = result.getString("valorHora");
+			usuario[5] = result.getString("codCategoria");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("No fue posible encontrar objeto usuario: " + e);
 		}
 		return usuario;
 	}
@@ -114,7 +138,7 @@ public class ConnUsuarios extends ConnDAO {
 		try {
 			return conn.excluir(query);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e);
 		}
 		return false;
 	}
@@ -126,7 +150,7 @@ public class ConnUsuarios extends ConnDAO {
 			result.next();
 			return result.getBoolean("CANTIDAD");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e);
 		}
 		return false;
 	}

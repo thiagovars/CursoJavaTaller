@@ -36,4 +36,12 @@ public class Categorias {
 	public String getNameByCodigo(String codigo) {
 		return conn.getNameByCodigo(codigo);
 	}
+	
+	public String getTipoByCodigo(String codigo) {
+		return conn.getTipoByCodigo(codigo);
+	}
+	
+	public double getValorHora(String codigo) {
+		return conn.getValorHoraByCodigo(codigo);
+	}
 }

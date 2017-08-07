@@ -64,7 +64,6 @@ public class MainAdmFrame extends JFrame {
 		JMenuItem excluCategoria = new JMenuItem("Excluir Categoria");
 		JMenuItem sueldo         = new JMenuItem("Sueldo de Los Usuarios");
 		JMenuItem perfiles       = new JMenuItem("Perfiles Usuarios");
-		JMenuItem permisiones    = new JMenuItem("Permissiones");
 		
 		JMenuItem cierreMensual  = new JMenuItem("Cierre del Mes");
 		JMenuItem pasadoMensual  = new JMenuItem("Cierres Pasados");
@@ -80,7 +79,6 @@ public class MainAdmFrame extends JFrame {
 		configuraciones.add(excluCategoria);
 		configuraciones.add(sueldo);
 		configuraciones.add(perfiles);
-		configuraciones.add(permisiones);
 		
 		controlMensual.add(cierreMensual);
 		controlMensual.add(pasadoMensual);
@@ -181,15 +179,7 @@ public class MainAdmFrame extends JFrame {
 				pantSueldoCategoria.setVisible(true);
 			}
 		});
-		permisiones.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				PermisAdmCategoria pantPermisCategoria = new PermisAdmCategoria();
-				pantPermisCategoria.setVisible(true);
-			}
-		});
+		
 		perfiles.addActionListener(new ActionListener() {
 			
 			@Override

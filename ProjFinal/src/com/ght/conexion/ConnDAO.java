@@ -26,7 +26,7 @@ public class ConnDAO {
 			ResultSet result = psm.executeQuery();
 			return result;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e);
 		}
 		return null;
 	}

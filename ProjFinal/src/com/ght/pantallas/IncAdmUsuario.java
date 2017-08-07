@@ -5,10 +5,12 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -27,10 +29,19 @@ import com.ght.classes.Usuarios;
 
 public class IncAdmUsuario extends JFrame {
 
+	/**
+	 * Campos del formulario
+	 */
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtLogin;
 	private JPasswordField txtClave;
+	private JFormattedTextField txtValorHora;
+	
+	/**
+	 * format de los números
+	 */
+	private NumberFormat valorHoraFormat;
 
 	/**
 	 * Launch the application.
@@ -127,7 +138,7 @@ public class IncAdmUsuario extends JFrame {
 		 * Label para la categoria
 		 */
 		JLabel lblCategoria = new JLabel("Categoria");
-		lblCategoria.setBounds(145, 234, 55, 22);
+		lblCategoria.setBounds(146, 267, 55, 22);
 		contentPane.add(lblCategoria);
 
 		/**
@@ -148,7 +159,7 @@ public class IncAdmUsuario extends JFrame {
 		final JComboBox cbxCategoria = new JComboBox();
 		cbxCategoria.setToolTipText("Categoria del usuario");
 		cbxCategoria.setModel(categoria.getCategorias());
-		cbxCategoria.setBounds(217, 234, 150, 22);
+		cbxCategoria.setBounds(218, 267, 150, 22);
 		contentPane.add(cbxCategoria);
 		
 		/**
@@ -181,6 +192,16 @@ public class IncAdmUsuario extends JFrame {
 		contentPane.add(txtClave);
 		
 		/**
+		 * Campo Valor Hora
+		 */
+		txtValorHora = new JFormattedTextField(valorHoraFormat);
+		txtValorHora.setValue(new Double(0));
+		txtValorHora.setColumns(10);
+		txtValorHora.setBounds(218, 232, 116, 22);
+		contentPane.add(txtValorHora);
+		txtValorHora.setColumns(10);
+		
+		/**
 		 * Buton que dispara la grabación en la tabla USUÁRIO
 		 */
 		JButton btnGuardarUsuario = new JButton("Guardar Usuario");
@@ -190,8 +211,9 @@ public class IncAdmUsuario extends JFrame {
 				String login  = txtLogin.getText();
 				String passw  = txtClave.getText();
 				String categoria = String.valueOf(cbxCategoria.getSelectedItem());
+				double valorHora = Double.parseDouble(txtValorHora.getText());
 				Usuarios usr = new Usuarios();
-				boolean guardarUsuario = usr.save(nombre, login, passw, categoria);
+				boolean guardarUsuario = usr.save(nombre, login, passw, valorHora, categoria, "");
 				/**
 				 * verifica si se puede grabar el usuário
 				 * en caso afirmativo muestra la mensaje de suceso.
@@ -204,7 +226,12 @@ public class IncAdmUsuario extends JFrame {
 				}
 			}
 		});
-		btnGuardarUsuario.setBounds(217, 269, 150, 25);
+		btnGuardarUsuario.setBounds(218, 302, 150, 25);
 		contentPane.add(btnGuardarUsuario);
+		
+		JLabel lblValorHora = new JLabel("Valor Hora");
+		lblValorHora.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblValorHora.setBounds(120, 235, 80, 14);
+		contentPane.add(lblValorHora);
 	}
 }

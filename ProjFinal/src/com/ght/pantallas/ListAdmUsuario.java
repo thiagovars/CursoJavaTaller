@@ -1,12 +1,13 @@
 package com.ght.pantallas;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,12 +22,10 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.ght.classes.TipoUsuario;
-import com.ght.classes.Usuarios;
-import javax.swing.ImageIcon;
-import java.awt.Color;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
-import java.awt.Component;
+
+import com.ght.classes.Categorias;
+import com.ght.classes.Usuarios;
 
 public class ListAdmUsuario extends JFrame {
 
@@ -94,8 +93,9 @@ public class ListAdmUsuario extends JFrame {
 		txtLogin.setBounds(164, 61, 116, 22);
 		contentPane.add(txtLogin);
 		
+		Categorias categorias = new Categorias();
 		final JComboBox cbxTipo = new JComboBox();
-		cbxTipo.setModel(new DefaultComboBoxModel(TipoUsuario.values()));
+		cbxTipo.setModel(categorias.getCategorias());
 		cbxTipo.setBounds(308, 61, 154, 22);
 		contentPane.add(cbxTipo);
 		
@@ -114,7 +114,7 @@ public class ListAdmUsuario extends JFrame {
 				if(!txtLogin.getText().equals("")) {
 					busqueda[1] = txtLogin.getText().toString();
 				}
-				if(!cbxTipo.getSelectedItem().equals(TipoUsuario.SELECIONE)) {
+				if(!cbxTipo.getSelectedItem().equals("Select Categoria")) {
 					busqueda[2] = String.valueOf(cbxTipo.getSelectedItem());
 				}
 				contentPane.remove(sclUsuarios);

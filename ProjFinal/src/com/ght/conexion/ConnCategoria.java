@@ -36,7 +36,7 @@ public class ConnCategoria {
 	}
 	
 	public String getNameByCodigo(String codigo) {
-		String query = "SELECT nombre FROM CATEGORIA WHERE codigo = '"+codigo+"'";
+		String query = "SELECT nombre FROM categoria WHERE codigo = "+codigo;
 		try {
 			ResultSet result = conn.buscar(query);
 			result.next();
@@ -48,8 +48,7 @@ public class ConnCategoria {
 	}
 	
 	public String getTipoByCodigo(String codigo) {
-		String query = "SELECT tipo FROM CATEGORIA WHERE codigo = '"+codigo+"'";
-		System.out.println(query);
+		String query = "SELECT tipo FROM categoria WHERE codigo = "+codigo;
 		try {
 			ResultSet result = conn.buscar(query);
 			result.next();
@@ -58,5 +57,17 @@ public class ConnCategoria {
 			System.out.println(e.getMessage());
 		}
 		return "";
+	}
+	
+	public double getValorHoraByCodigo(String codigo) {
+		String query = "SELECT valorHora FROM categoria WHERE codigo = "+codigo;
+		try {
+			ResultSet result = conn.buscar(query);
+			result.next();
+			return Double.parseDouble(result.getString("valorHora"));
+		} catch (Exception e) {
+			System.out.println("No fue posible levantar el Valor de la Hora de la categoria del usuario: "+e.getMessage());
+		}
+		return 0;
 	}
 }

@@ -2,15 +2,18 @@ Tamanho e texto de cabeçalho de cada tela
 -6 Título para cada página: (GHT - título da tela)  
 +-4	login
 +-4	inclusão de usuário
--4	lista de usuários cadastrados (administrador) com busca
++-4	lista de usuários cadastrados (administrador) com busca
 +-1		busca
--1		edição de usuário
--2			clicar no botão do usuario abre uma janela para escolher o usuário a ser editado
--2			ou passar parâmetro para a janela ou fazer a janela mostrar uma janela
++-1		edição de usuário
++-2			clicar no botão do usuario abre uma janela para escolher o usuário a ser editado
+.-2			ou passar parâmetro para a janela ou fazer a janela mostrar uma janela
 +-1		exclusão de usuário
 
++Fazer com que a classe de tipos de categoria conecte com o banco
++-4	talvez seja necessário re adaptar esse método.
+
 Adicionar icones para acoes do programa
--4	https://www.iconfinder.com/iconsets/font-awesome
++-4	https://www.iconfinder.com/iconsets/font-awesome
 
 Adicionar menu cadastro no main do adminsitrador para listar usuários cadastrados.
 -4	mudança de senha de usuário
@@ -22,10 +25,10 @@ Adicionar menu cadastro no main do adminsitrador para listar usuários cadastrad
 +Exclusão de menus que não serão utilizados em cada uma das telas
 
 Tela de lista de usuario
--4	campos de busca
--4	listagem completa dos usuários (codigo, nome, login e categoria)
--4	botões de editar e excluir usuário.
--2		edição: preencher campos do formulário.
++-4	campos de busca
++-4	listagem completa dos usuários (codigo, nome, login e categoria)
++-4	botões de editar e excluir usuário.
++-2		edição: preencher campos do formulário.
 
 Tela de funcionário
 -4	relatório mensal
@@ -39,16 +42,24 @@ Tela do gestor
 
 Tela de configurações
 -4	tipos de acesso
--4	variáveis de sessão?
--4	permissões
+-4	cadastro de categorias e acesso
+-4	montante salarial por categoria
+.-4	variáveis de sessão?
+-.4	permissões
 
 Tela de apontamentos
 -4	cadastro de horas
--4	descrição das tarefas do dia
+.-4	descrição das tarefas do dia
 -4	usuário dono das horas
+-2		calculo de horas no dia
+-2		calculo de horas no mês
+-2		calculo de montante salarial atual
+-2		fechar mês?
 
 Tela de processamento mensal
-
+-4	identificação de fim do mês
+-4	lista de meses
+-4	emitir relatório e total a pagar
 +Fazer logar no sistema
 
 Funcionalidades de cada usuário
@@ -67,18 +78,27 @@ Comerçar parte escrita do programa
 -2	pedir ajuda para amor traduzir toda a UI.
 
 PARA O FIM DE SEMANA
--3	LISTAR USUÁRIOS
+-4	acrescentado valor hora
+-2		consertar nas telas de inclusão, e edição.
+-2		análogo às categorias.
+-3	CADASTRO DE HORAS DE USUARIOS
+-4		TELA DE USUÁRIOS NÃO ESTÁ FECHANDO O SISTEMA
+-4		MANEIRA RÁPIDA DE CADASTRO DE HORAS
+-4		CALCULO DE SUELDO
+-4		CRIAR SESSAO PARA PEGAR O USUARIO LOGADO
++-3	LISTAR USUÁRIOS
 +-2		fazer o método que irá preencher os objetos com as listas de usuários
 +-2		busca dos usuários com parâmetros
 .!-4		fazer a lista receber um botão/checkbox
 +-2		botão que irá excluir regsitros (será prompt?)
 .-2		editar usuário direto na tabela (botão quer irá setar uma senha temporária)
--3	CRUD COMPLETO PARA USUÁRIOS
--2 		edição
++-3	CRUD COMPLETO PARA USUÁRIOS
++-2 		edição
 +-2		tela
--2		botão que irá salvar no banco as alterações
++-2		botão que irá salvar no banco as alterações
 -2		
 
-PARA AGORA A NOITE DURANTE A SEMANA
-+-3	INSERIR BOTÕES DENTRO DA TABELA COM AÇÃO PARA CADA USUÁRIO
+PARA A NOITE E DURANTE A SEMANA
+-3	CORRIGIR TODOS OS THROW EXCEPTION PARA TROCAR DE e.getMessage() para e...
+-3	O VALOR HORA NO SALVAMENTO ESTÁ SENDO ARREDONDADO
 -3	COMEÇAR TELA DE CONFIGURAÇÕES

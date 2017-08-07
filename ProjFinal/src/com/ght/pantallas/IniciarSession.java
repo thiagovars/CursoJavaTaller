@@ -92,9 +92,8 @@ public class IniciarSession extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre = txtNombre.getText();
 				String passw = txtPassw.getText();
-				Usuarios usuario = new Usuarios();
+				Usuarios usuario = new Usuarios(nombre, passw);
 				try	{
-					usuario.iniciarSession(nombre, passw);
 					switch	(usuario.getTipoUsuario()) {
 						case "A":
 							MainAdmFrame pantAdm = new MainAdmFrame();
@@ -102,7 +101,7 @@ public class IniciarSession extends JFrame {
 							pantAdm.setVisible(true);
 							break;
 						case "F":
-							MainUsuarioFrame pantFunc = new MainUsuarioFrame();
+							MainUsuarioFrame pantFunc = new MainUsuarioFrame(usuario);
 							pantFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
 							pantFunc.setVisible(true);
 							break;
@@ -112,15 +111,15 @@ public class IniciarSession extends JFrame {
 					}
 					dispose();
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
-					JOptionPane.showMessageDialog(null, "Usuario o clave no reconocidos!");
+					System.out.println("Error al levantar session: " + e);
+					JOptionPane.showMessageDialog(null, "Error, no fue posible levantar la session!");
 				}
 			}
 		});
 		btnIniciarSession.setBounds(146, 132, 176, 23);
 		contentPane.add(btnIniciarSession);
 		
-		JLabel lblNewLabel = new JLabel("Gerenciador de Horas Trabalhadas");
+		JLabel lblNewLabel = new JLabel("Gestor de Horas Trabalhadas");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setBounds(111, 13, 251, 16);
 		contentPane.add(lblNewLabel);

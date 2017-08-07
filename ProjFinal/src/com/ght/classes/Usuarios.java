@@ -4,7 +4,6 @@ import com.ght.conexion.ConnUsuarios;
 
 public class Usuarios {
 	
-	private String usrLogado;
 	private String tipoUsuario;
 	private ConnUsuarios conn;
 	
@@ -13,29 +12,34 @@ public class Usuarios {
 	private String nombre;
 	private String login;
 	private String clave;
+	private double valorHora;
 	private String codCategoria;
 	
 	public Usuarios() {
-		this.conn = new ConnUsuarios();
+		conn = new ConnUsuarios();
+	}
+	
+	public Usuarios(String login, String passw) {
+		conn = new ConnUsuarios();
+		iniciarSession(login, passw);
 	}
 	
 	public Usuarios(String codigo) {
-		this.conn = new ConnUsuarios();
+		conn = new ConnUsuarios();
 		setObjectUsuario(codigo);
 	}
 	
 	public boolean iniciarSession(String login, String passw) {
-		Object[] retorno = new String[4];
+		Object[] retorno = new String[6];
 		retorno = conn.iniciarSession(login, passw);
+		String codigo       = retorno[0].toString();
+		String nombre       = retorno[1].toString();
+		String valorHora    = retorno[2].toString();
+		String codCategoria = retorno[3].toString();
+		setObjectUsuario(codigo);
 		Categorias categoria = new Categorias();
-		setTipoUsuario(categoria.getNameByCodigo(retorno[3].toString()));
-		setUsrLogado(retorno[2].toString());
-		return (!this.getUsrLogado().equals("") && !this.getTipoUsuario().equals(""));
-	}
-	
-	public void setUsrLogado(String usrLogado) {
-		//to do: gravar sessão aqui
-		this.usrLogado = usrLogado;
+		setTipoUsuario(categoria.getTipoByCodigo(codCategoria));
+		return (!this.getCodigo().equals("") && !this.getTipoUsuario().equals(""));
 	}
 	
 	public void setTipoUsuario(String tipoUsuario) {
@@ -44,10 +48,6 @@ public class Usuarios {
 	
 	public String getTipoUsuario() {
 		return tipoUsuario;
-	}
-	
-	public String getUsrLogado() {
-		return usrLogado;
 	}
 	
 	public String getCodigo() {
@@ -73,6 +73,10 @@ public class Usuarios {
 	public void setLogin(String login) {
 		this.login = login;
 	}
+	
+	public void setValorHora(double valor) {
+		this.valorHora = valor;
+	}
 
 	public String getClave() {
 		return clave;
@@ -90,19 +94,23 @@ public class Usuarios {
 		this.codCategoria = codCategoria;
 	}
 
-	public boolean save(String nombre, String login, String passw, String categoria) {
+	public boolean save(String nombre, String login, String passw, double valorHora, String categoria, String codigo) {
 		Categorias categorias = new Categorias();
-		return conn.saveUsuario(nombre, login, passw, categorias.getCodigoByName(categoria));
+		if(codigo.equals("")) {
+			return conn.guardaUsuario(nombre, login, passw, valorHora, categorias.getCodigoByName(categoria));
+		} else {
+			return conn.actualizaUsuario(nombre, login, passw, valorHora, categorias.getCodigoByName(categoria), codigo);
+		}
 	}
 	
 	public void setObjectUsuario(String codigo) {
-		System.out.println("codigo no setObject " + codigo);
 		Object[] objectUsuarios = conn.getUsuario(codigo);
 		this.codigo = objectUsuarios[0].toString();
-		this.nombre = objectUsuarios[1].toString();
-		this.login  = objectUsuarios[2].toString();
-		this.clave  = objectUsuarios[3].toString();
-		this.codCategoria = objectUsuarios[4].toString();
+		nombre = objectUsuarios[1].toString();
+		login  = objectUsuarios[2].toString();
+		clave  = objectUsuarios[3].toString();
+		valorHora = Double.parseDouble(objectUsuarios[4].toString());
+		codCategoria = objectUsuarios[5].toString();
 	}
 	
 	public Object[][] getListadoUsuarios(Object[] busqueda) {
@@ -135,5 +143,14 @@ public class Usuarios {
 	
 	public boolean isUsr(String codigo) {
 		return conn.find(codigo);
+	}
+	
+	public double getValorHora() {
+		if(valorHora == 0) {
+			Categorias categoria = new Categorias();
+			return categoria.getValorHora(getCodCategoria());
+		} else {
+			return valorHora;
+		}
 	}
 }
