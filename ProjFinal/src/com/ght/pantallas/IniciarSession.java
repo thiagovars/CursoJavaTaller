@@ -119,7 +119,7 @@ public class IniciarSession extends JFrame {
 		btnIniciarSession.setBounds(146, 132, 176, 23);
 		contentPane.add(btnIniciarSession);
 		
-		JLabel lblNewLabel = new JLabel("Gestor de Horas Trabalhadas");
+		JLabel lblNewLabel = new JLabel("Gestor de Horas Trabajadas");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setBounds(111, 13, 251, 16);
 		contentPane.add(lblNewLabel);

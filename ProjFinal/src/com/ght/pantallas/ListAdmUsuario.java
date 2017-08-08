@@ -130,7 +130,7 @@ public class ListAdmUsuario extends JFrame {
 		btnExcluir.setBorder(null);
 		btnExcluir.setBorderPainted(false);
 		btnExcluir.setContentAreaFilled(false);
-		btnExcluir.setIcon(new ImageIcon("C:\\Users\\Thiago\\Documents\\Taller de Informatica\\CursoJavaTaller\\ProjFinal\\Imagenes\\eraser.png"));
+		btnExcluir.setIcon(new ImageIcon(ListAdmUsuario.class.getResource("/imagenes/eraser.png")));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Usuarios usuario = new Usuarios();
@@ -154,7 +154,7 @@ public class ListAdmUsuario extends JFrame {
 				pantEdtUsuario.setVisible(true);
 			}
 		});
-		btnEditar.setIcon(new ImageIcon("C:\\Users\\Thiago\\Documents\\Taller de Informatica\\CursoJavaTaller\\ProjFinal\\Imagenes\\edit.png"));
+		btnEditar.setIcon(new ImageIcon(ListAdmUsuario.class.getResource("/imagenes/edit.png")));
 		btnEditar.setToolTipText("Editar Usuario");
 		btnEditar.setOpaque(false);
 		btnEditar.setContentAreaFilled(false);

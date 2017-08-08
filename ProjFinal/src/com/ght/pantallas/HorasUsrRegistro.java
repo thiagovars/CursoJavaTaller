@@ -3,19 +3,27 @@ package com.ght.pantallas;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.ght.classes.Meses;
+import com.ght.classes.Calendario;
 import com.ght.classes.Usuarios;
 
 public class HorasUsrRegistro extends JFrame {
@@ -23,6 +31,11 @@ public class HorasUsrRegistro extends JFrame {
 	private JPanel contentPane;
 	static Calendar calendar;
 	static Usuarios usuario;
+	private JTextField txtFecha;
+	private JTextField txtEntrada;
+	private JTextField txtSalida;
+	private JTextField txtHorasDescanso;
+	private JTextField txtHorasTrabajadas;
 
 	/**
 	 * Launch the application.
@@ -102,30 +115,104 @@ public class HorasUsrRegistro extends JFrame {
 	}
 	
 	public void crearTablaMes() {
-		Meses mes = new Meses();
-		System.out.println(mes.getCantidadDias());
-		final JLabel lblMes = new JLabel(mes.getMes());
+		/**
+		 * formato de fechas y horas
+		 */
+		DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat formatHora = new SimpleDateFormat("HH:mm");
+		
+		final Calendario calendario = new Calendario();
+		final JLabel lblMes = new JLabel(calendario.getMes());
+		
+		
 		lblMes.setForeground(new Color(0, 128, 128));
 		lblMes.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMes.setBounds(491, 87, 148, 20);
 		contentPane.add(lblMes);
 		
 		String[] columnas = {"Fecha", "Entrada", "Salida", "Hora Descanso", "Total Horas Del Día"};
-		Object[][] horarios = new String[mes.getCantidadDias()][5];
-		for (int i=0; i < mes.getCantidadDias(); i++) {
-			horarios[i][0] = i+1+"/"+calendar.get(calendar.MONTH)+"/"+calendar.get(calendar.YEAR);
-			horarios[i][1] = "00:00";
-			horarios[i][2] = "00:00";
-			horarios[i][3] = "0";
-			horarios[i][4] = "0";
-		}
+		Object[][] horarios = new String[0][5];
+//		for (int i=0; i < mes.getCantidadDias(); i++) {
+//			horarios[i][0] = i+1+"/"+calendar.get(calendar.MONTH)+"/"+calendar.get(calendar.YEAR);
+//			horarios[i][1] = "00:00";
+//			horarios[i][2] = "00:00";
+//			horarios[i][3] = "0";
+//			horarios[i][4] = "0";
+//		}
+		
+		JLabel lblFecha = new JLabel("Fecha");
+		lblFecha.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFecha.setBounds(12, 118, 46, 14);
+		contentPane.add(lblFecha);
+		
+		
+		final JFormattedTextField txtFecha = new JFormattedTextField(formatDate);
+		txtFecha.setBounds(59, 115, 86, 20);
+		contentPane.add(txtFecha);
+		txtFecha.setColumns(10);
+		
+		JLabel lblEntrada = new JLabel("Entrada");
+		lblEntrada.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEntrada.setBounds(195, 117, 46, 14);
+		contentPane.add(lblEntrada);
+		
+		final JFormattedTextField txtEntrada = new JFormattedTextField(formatHora);
+		txtEntrada.setBounds(242, 114, 86, 20);
+		contentPane.add(txtEntrada);
+		txtEntrada.setColumns(10);
+		
+		JLabel lblSalida = new JLabel("Salida");
+		lblSalida.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSalida.setBounds(195, 144, 46, 14);
+		contentPane.add(lblSalida);
+		
+		final JFormattedTextField txtSalida = new JFormattedTextField(formatHora);
+		txtSalida.setBounds(242, 141, 86, 20);
+		contentPane.add(txtSalida);
+		txtSalida.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Hora Descanso");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(396, 117, 72, 14);
+		contentPane.add(lblNewLabel);
+		
+		txtHorasDescanso = new JTextField();
+		txtHorasDescanso.setBounds(469, 114, 86, 20);
+		contentPane.add(txtHorasDescanso);
+		txtHorasDescanso.setColumns(10);
+		
+		JLabel lblTotalHorasTrabajadas = new JLabel("Total Horas Trabajadas");
+		lblTotalHorasTrabajadas.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTotalHorasTrabajadas.setBounds(356, 147, 112, 14);
+		contentPane.add(lblTotalHorasTrabajadas);
+		
+		txtHorasTrabajadas = new JTextField();
+		txtHorasTrabajadas.setEditable(false);
+		txtHorasTrabajadas.setColumns(10);
+		txtHorasTrabajadas.setBounds(469, 144, 86, 20);
+		contentPane.add(txtHorasTrabajadas);
+		
+		JButton btnHoy = new JButton("");
+		btnHoy.setIcon(new ImageIcon(HorasUsrRegistro.class.getResource("/imagenes/calendar-38.png")));
+		btnHoy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtFecha.setText(calendario.getFechaActual());
+			}
+		});
+		btnHoy.setBounds(153, 114, 23, 20);
+		contentPane.add(btnHoy);
+		
 		JTable tablaHorarios = new JTable();
 		tablaHorarios.setFillsViewportHeight(true);
 		tablaHorarios.setBounds(10, 31, 444, 340);
 		tablaHorarios.setModel(new DefaultTableModel(horarios, columnas));
 		
 		JScrollPane scrollPane = new JScrollPane(tablaHorarios);
-		scrollPane.setBounds(0, 117, 738, 426);
+		scrollPane.setBounds(0, 236, 738, 307);
 		contentPane.add(scrollPane);
+		
+		JButton btnNewButton = new JButton("Registrar");
+		btnNewButton.setBounds(565, 114, 100, 50);
+		contentPane.add(btnNewButton);
 	}
 }
