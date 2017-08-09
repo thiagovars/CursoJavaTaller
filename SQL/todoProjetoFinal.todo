@@ -15,6 +15,7 @@ Tamanho e texto de cabeçalho de cada tela
 Adicionar icones para acoes do programa
 -4	https://www.iconfinder.com/iconsets/font-awesome
 -4 	https://www.flaticon.com/packs
+-4	https://material.io/icons/?utm_source=google&utm_medium=cpc&utm_campaign=1001467%20%7C%20Material.IO%20%7C%20Global%20%7C%20en%20%7C%20Hybrid%20%7C%20Text%20%7C%20SKWS&utm_term=%7Bkeyword%7D&gclid=Cj0KCQjwwqXMBRCDARIsAD-AQ2hAy0oElE7257wEM1X_SfKv6t6rJyrCP-UXhMcweOG5z44E1ncxwH8aAko0EALw_wcB#ic_delete
 Adicionar menu cadastro no main do adminsitrador para listar usuários cadastrados.
 -4	mudança de senha de usuário
 -4	ativação ou inativação de usuário
@@ -79,13 +80,13 @@ Comerçar parte escrita do programa
 
 PARA O FIM DE SEMANA
 -4	acrescentado valor hora
--2		consertar nas telas de inclusão, e edição.
++-2		consertar nas telas de inclusão, e edição.
 -2		análogo às categorias.
 -3	CADASTRO DE HORAS DE USUARIOS
--4		TELA DE USUÁRIOS NÃO ESTÁ FECHANDO O SISTEMA
--4		MANEIRA RÁPIDA DE CADASTRO DE HORAS
++-4		TELA DE USUÁRIOS NÃO ESTÁ FECHANDO O SISTEMA
++-4		MANEIRA RÁPIDA DE CADASTRO DE HORAS
 -4		CALCULO DE SUELDO
--4		CRIAR SESSAO PARA PEGAR O USUARIO LOGADO
++-4		CRIAR SESSAO PARA PEGAR O USUARIO LOGADO
 +-3	LISTAR USUÁRIOS
 +-2		fazer o método que irá preencher os objetos com as listas de usuários
 +-2		busca dos usuários com parâmetros
@@ -101,5 +102,6 @@ PARA O FIM DE SEMANA
 PARA A NOITE E DURANTE A SEMANA
 -3	CORRIGIR TODOS OS THROW EXCEPTION PARA TROCAR DE e.getMessage() para e...
 -3	CALCULO DE HORAS NO JAVA
+-4		não está trazendo as horas do usuário logado, debugar sql
 .-3	O VALOR HORA NO SALVAMENTO ESTÁ SENDO ARREDONDADO
 -3	COMEÇAR TELA DE CONFIGURAÇÕES

@@ -7,13 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -24,19 +24,33 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.ght.classes.Calendario;
+import com.ght.classes.HorasTrabajadas;
 import com.ght.classes.Usuarios;
 
 public class HorasUsrRegistro extends JFrame {
 
-	private JPanel contentPane;
-	static Calendar calendar;
+	/**
+	 * Objetos estaticos
+	 */
+	final Calendario calendario = new Calendario();
 	static Usuarios usuario;
+	
+	/**
+	 * campos
+	 */
 	private JTextField txtFecha;
 	private JTextField txtEntrada;
 	private JTextField txtSalida;
 	private JTextField txtHorasDescanso;
 	private JTextField txtHorasTrabajadas;
 
+	/**
+	 * Componentes
+	 */
+	private JScrollPane scrollPane;
+	private JPanel contentPane;
+	private JTable tablaHorarios;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -56,8 +70,10 @@ public class HorasUsrRegistro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public HorasUsrRegistro(Usuarios usuario) {
-		calendar = calendar.getInstance();
+	public HorasUsrRegistro(final Usuarios usuario) {
+		DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat formatHora = new SimpleDateFormat("HH:mm");
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 756, 590);
 		contentPane = new JPanel();
@@ -110,35 +126,6 @@ public class HorasUsrRegistro extends JFrame {
 		lblMesActual.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblMesActual.setBounds(370, 87, 109, 16);
 		contentPane.add(lblMesActual);
-		
-		crearTablaMes();
-	}
-	
-	public void crearTablaMes() {
-		/**
-		 * formato de fechas y horas
-		 */
-		DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-		DateFormat formatHora = new SimpleDateFormat("HH:mm");
-		
-		final Calendario calendario = new Calendario();
-		final JLabel lblMes = new JLabel(calendario.getMes());
-		
-		
-		lblMes.setForeground(new Color(0, 128, 128));
-		lblMes.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblMes.setBounds(491, 87, 148, 20);
-		contentPane.add(lblMes);
-		
-		String[] columnas = {"Fecha", "Entrada", "Salida", "Hora Descanso", "Total Horas Del Día"};
-		Object[][] horarios = new String[0][5];
-//		for (int i=0; i < mes.getCantidadDias(); i++) {
-//			horarios[i][0] = i+1+"/"+calendar.get(calendar.MONTH)+"/"+calendar.get(calendar.YEAR);
-//			horarios[i][1] = "00:00";
-//			horarios[i][2] = "00:00";
-//			horarios[i][3] = "0";
-//			horarios[i][4] = "0";
-//		}
 		
 		JLabel lblFecha = new JLabel("Fecha");
 		lblFecha.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -193,26 +180,66 @@ public class HorasUsrRegistro extends JFrame {
 		contentPane.add(txtHorasTrabajadas);
 		
 		JButton btnHoy = new JButton("");
-		btnHoy.setIcon(new ImageIcon(HorasUsrRegistro.class.getResource("/imagenes/calendar-38.png")));
+		btnHoy.setIcon(new ImageIcon(HorasUsrRegistro.class.getResource("/imagenes/calendar.png")));
+		btnHoy.setOpaque(false);
+		btnHoy.setContentAreaFilled(false);
+		btnHoy.setBorderPainted(false);
+		btnHoy.setBorder(null);
 		btnHoy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				txtFecha.setText(calendario.getFechaActual());
 			}
 		});
-		btnHoy.setBounds(153, 114, 23, 20);
+		btnHoy.setBounds(153, 114, 40, 33);
 		contentPane.add(btnHoy);
 		
-		JTable tablaHorarios = new JTable();
+		JButton btnRegistrar = new JButton("");
+		btnRegistrar.setToolTipText("Registrar horario");
+		btnRegistrar.setContentAreaFilled(false);
+		btnRegistrar.setIcon(new ImageIcon(HorasUsrRegistro.class.getResource("/imagenes/ic_get_app_black_24dp_2x.png")));
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String fecha = txtFecha.getText();
+				String entrada = txtEntrada.getText();
+				String salida = txtSalida.getText();
+				String horasTrab = txtHorasTrabajadas.getText();
+				String descanso = txtHorasDescanso.getText();
+				HorasTrabajadas hTrab = new HorasTrabajadas(usuario);
+				if(hTrab.registrar(fecha, entrada, salida, horasTrab, descanso)){
+					JOptionPane.showMessageDialog(null, "Horas registradas con éxito!");
+					scrollPane.remove(tablaHorarios);
+					
+				}
+			}
+		});
+		btnRegistrar.setBounds(565, 114, 54, 50);
+		contentPane.add(btnRegistrar);
+		
+		crearTablaMes(usuario);
+	}
+	
+	public void crearTablaMes(Usuarios usuario) {
+		/**
+		 * formato de fechas y horas
+		 */
+		final JLabel lblMes = new JLabel(calendario.getMes());
+		System.out.println("horas trabalhadas nome do usuário logado" + usuario.getNombre());
+		HorasTrabajadas horasTrab = new HorasTrabajadas(usuario); 
+		lblMes.setForeground(new Color(0, 128, 128));
+		lblMes.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMes.setBounds(491, 87, 148, 20);
+		contentPane.add(lblMes);
+		
+		String[] columnas = {"Fecha", "Entrada", "Salida", "Hora Descanso", "Total Horas Del Día"};
+		Object[][] horarios = horasTrab.getHorariosDelUsuario();
+		tablaHorarios = new JTable();
 		tablaHorarios.setFillsViewportHeight(true);
 		tablaHorarios.setBounds(10, 31, 444, 340);
 		tablaHorarios.setModel(new DefaultTableModel(horarios, columnas));
 		
-		JScrollPane scrollPane = new JScrollPane(tablaHorarios);
+		scrollPane = new JScrollPane(tablaHorarios);
 		scrollPane.setBounds(0, 236, 738, 307);
 		contentPane.add(scrollPane);
 		
-		JButton btnNewButton = new JButton("Registrar");
-		btnNewButton.setBounds(565, 114, 100, 50);
-		contentPane.add(btnNewButton);
 	}
 }
