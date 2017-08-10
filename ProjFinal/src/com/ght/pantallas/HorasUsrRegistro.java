@@ -1,12 +1,17 @@
 package com.ght.pantallas;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,10 +23,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import com.ght.classes.Calendario;
 import com.ght.classes.HorasTrabajadas;
@@ -38,11 +44,11 @@ public class HorasUsrRegistro extends JFrame {
 	/**
 	 * campos
 	 */
-	private JTextField txtFecha;
-	private JTextField txtEntrada;
-	private JTextField txtSalida;
-	private JTextField txtHorasDescanso;
-	private JTextField txtHorasTrabajadas;
+	private final JFormattedTextField txtFecha;
+	private final JFormattedTextField txtEntrada;
+	private final JFormattedTextField txtSalida;
+	private final JFormattedTextField txtHorasDescanso;
+	private final JFormattedTextField txtHorasTrabajadas;
 
 	/**
 	 * Componentes
@@ -50,6 +56,14 @@ public class HorasUsrRegistro extends JFrame {
 	private JScrollPane scrollPane;
 	private JPanel contentPane;
 	private JTable tablaHorarios;
+	
+	/**
+	 * Formataciòn de numeros
+	 */
+	private DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+	private DateFormat formatHora = new SimpleDateFormat("HH:mm");
+	private JButton btnRegistrar;
+	
 	
 	/**
 	 * Launch the application.
@@ -71,10 +85,8 @@ public class HorasUsrRegistro extends JFrame {
 	 * Create the frame.
 	 */
 	public HorasUsrRegistro(final Usuarios usuario) {
-		DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-		DateFormat formatHora = new SimpleDateFormat("HH:mm");
-		
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		/** mudar antes de cerrar */
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 756, 590);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,6 +94,7 @@ public class HorasUsrRegistro extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		/** etiquetas **/
 		JLabel lblRegistroDeHoras = new JLabel("Registro de Horas Trabajadas");
 		lblRegistroDeHoras.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistroDeHoras.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -91,6 +104,12 @@ public class HorasUsrRegistro extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(279, 42, 100, 2);
 		contentPane.add(separator);
+		
+		final JLabel lblMes = new JLabel(calendario.getMes());
+		lblMes.setForeground(new Color(0, 128, 128));
+		lblMes.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMes.setBounds(491, 87, 148, 20);
+		contentPane.add(lblMes);
 		
 		JLabel lblHorasTrabajadas = new JLabel("Horas Trabajadas");
 		lblHorasTrabajadas.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -132,53 +151,93 @@ public class HorasUsrRegistro extends JFrame {
 		lblFecha.setBounds(12, 118, 46, 14);
 		contentPane.add(lblFecha);
 		
-		
-		final JFormattedTextField txtFecha = new JFormattedTextField(formatDate);
-		txtFecha.setBounds(59, 115, 86, 20);
-		contentPane.add(txtFecha);
-		txtFecha.setColumns(10);
-		
 		JLabel lblEntrada = new JLabel("Entrada");
 		lblEntrada.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEntrada.setBounds(195, 117, 46, 14);
 		contentPane.add(lblEntrada);
-		
-		final JFormattedTextField txtEntrada = new JFormattedTextField(formatHora);
-		txtEntrada.setBounds(242, 114, 86, 20);
-		contentPane.add(txtEntrada);
-		txtEntrada.setColumns(10);
 		
 		JLabel lblSalida = new JLabel("Salida");
 		lblSalida.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblSalida.setBounds(195, 144, 46, 14);
 		contentPane.add(lblSalida);
 		
-		final JFormattedTextField txtSalida = new JFormattedTextField(formatHora);
-		txtSalida.setBounds(242, 141, 86, 20);
-		contentPane.add(txtSalida);
-		txtSalida.setColumns(10);
-		
 		JLabel lblNewLabel = new JLabel("Hora Descanso");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setBounds(396, 117, 72, 14);
 		contentPane.add(lblNewLabel);
-		
-		txtHorasDescanso = new JTextField();
-		txtHorasDescanso.setBounds(469, 114, 86, 20);
-		contentPane.add(txtHorasDescanso);
-		txtHorasDescanso.setColumns(10);
 		
 		JLabel lblTotalHorasTrabajadas = new JLabel("Total Horas Trabajadas");
 		lblTotalHorasTrabajadas.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTotalHorasTrabajadas.setBounds(356, 147, 112, 14);
 		contentPane.add(lblTotalHorasTrabajadas);
 		
-		txtHorasTrabajadas = new JTextField();
+		/** Campos del formulario **/
+		txtFecha = new JFormattedTextField(formatDate);
+		txtFecha.setBounds(59, 115, 86, 20);
+		contentPane.add(txtFecha);
+		txtFecha.setColumns(10);
+		
+		txtEntrada = new JFormattedTextField(formatHora);
+		txtEntrada.setBounds(242, 114, 86, 20);
+		txtEntrada.setColumns(10);
+		contentPane.add(txtEntrada);
+		
+		txtSalida = new JFormattedTextField(formatHora);
+		txtSalida.setBounds(242, 141, 86, 20);
+		txtSalida.setColumns(10);
+		contentPane.add(txtSalida);
+		txtSalida.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// al hacer click en el campo hora de salida
+				// el sistema estima la hora de salida
+				Date hora = null;
+				try {
+					hora = new SimpleDateFormat("HH:mm").parse(txtEntrada.getText());
+					calendario.setTime(hora);
+					calendario.add(calendario.HOUR_OF_DAY, 9);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				txtSalida.setValue(calendario.getTime());
+			}
+		});
+		
+		txtHorasDescanso = new JFormattedTextField(formatHora);
+		txtHorasDescanso.setBounds(469, 114, 86, 20);
+		contentPane.add(txtHorasDescanso);
+		txtHorasDescanso.setColumns(10);
+		
+		txtHorasTrabajadas = new JFormattedTextField(formatHora);
 		txtHorasTrabajadas.setEditable(false);
 		txtHorasTrabajadas.setColumns(10);
 		txtHorasTrabajadas.setBounds(469, 144, 86, 20);
 		contentPane.add(txtHorasTrabajadas);
+		txtHorasTrabajadas.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				// TODO Auto-generated method stub
+				Date totalHoras = calendario.getHoursBetweenTimes(txtEntrada.getText(), txtSalida.getText());
+				txtHorasTrabajadas.setValue(totalHoras);
+			}
+		});
 		
+		/** Botones **/
 		JButton btnHoy = new JButton("");
 		btnHoy.setIcon(new ImageIcon(HorasUsrRegistro.class.getResource("/imagenes/calendar.png")));
 		btnHoy.setOpaque(false);
@@ -193,7 +252,7 @@ public class HorasUsrRegistro extends JFrame {
 		btnHoy.setBounds(153, 114, 40, 33);
 		contentPane.add(btnHoy);
 		
-		JButton btnRegistrar = new JButton("");
+		btnRegistrar = new JButton("");
 		btnRegistrar.setToolTipText("Registrar horario");
 		btnRegistrar.setContentAreaFilled(false);
 		btnRegistrar.setIcon(new ImageIcon(HorasUsrRegistro.class.getResource("/imagenes/ic_get_app_black_24dp_2x.png")));
@@ -222,14 +281,7 @@ public class HorasUsrRegistro extends JFrame {
 		/**
 		 * formato de fechas y horas
 		 */
-		final JLabel lblMes = new JLabel(calendario.getMes());
-		System.out.println("horas trabalhadas nome do usuário logado" + usuario.getNombre());
-		HorasTrabajadas horasTrab = new HorasTrabajadas(usuario); 
-		lblMes.setForeground(new Color(0, 128, 128));
-		lblMes.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblMes.setBounds(491, 87, 148, 20);
-		contentPane.add(lblMes);
-		
+		HorasTrabajadas horasTrab = new HorasTrabajadas(usuario);
 		String[] columnas = {"Fecha", "Entrada", "Salida", "Hora Descanso", "Total Horas Del Día"};
 		Object[][] horarios = horasTrab.getHorariosDelUsuario();
 		tablaHorarios = new JTable();
@@ -240,6 +292,7 @@ public class HorasUsrRegistro extends JFrame {
 		scrollPane = new JScrollPane(tablaHorarios);
 		scrollPane.setBounds(0, 236, 738, 307);
 		contentPane.add(scrollPane);
+		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtFecha, txtEntrada, txtSalida, txtHorasDescanso, txtHorasTrabajadas, btnRegistrar}));
 		
 	}
 }

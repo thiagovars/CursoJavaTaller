@@ -42,6 +42,7 @@ public class MainUsuarioFrame extends JFrame {
 		setBounds(100, 100, 450, 426);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setTitle("GERENCIADOR DE HORAS TRABAJADAS");
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
