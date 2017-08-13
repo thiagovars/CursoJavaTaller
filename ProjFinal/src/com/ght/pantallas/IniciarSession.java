@@ -105,6 +105,11 @@ public class IniciarSession extends JFrame {
 							pantFunc.setExtendedState(JFrame.MAXIMIZED_BOTH);
 							pantFunc.setVisible(true);
 							break;
+						case "G":
+							MainGestorFrame pantGest = new MainGestorFrame();
+							pantGest.setExtendedState(JFrame.MAXIMIZED_BOTH);
+							pantGest.setVisible(true);
+							break;
 						default:
 							JOptionPane.showMessageDialog(null, "Usuario no encontrado!");
 							break;

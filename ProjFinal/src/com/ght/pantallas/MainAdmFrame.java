@@ -40,12 +40,10 @@ public class MainAdmFrame extends JFrame {
 		setBounds(100, 100, 450, 451);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setTitle("GERENCIADOR DE HORAS TRABAJADAS - Adminsitrador");
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		/**
-		 * TODO: verificar se não existe uma forma de encapsular a criação de menus!
-		 */
 		JMenuBar menu = new JMenuBar();
 		
 		JMenu archivo         = new JMenu("File");

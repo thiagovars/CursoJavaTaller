@@ -60,10 +60,20 @@ public class HorasUsrRegistro extends JFrame {
 	/**
 	 * Formataciòn de numeros
 	 */
-	private DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+	private DateFormat formatDate = new SimpleDateFormat("yyyy-mm-dd");
 	private DateFormat formatHora = new SimpleDateFormat("HH:mm");
+	
+	/**
+	 * Boton
+	 */
 	private JButton btnRegistrar;
 	
+	/**
+	 * Etiqueta
+	 */
+	public JLabel lblTotalHoras;
+	public JLabel lblSueldo;
+	public JLabel lblValorHoras;
 	
 	/**
 	 * Launch the application.
@@ -86,7 +96,7 @@ public class HorasUsrRegistro extends JFrame {
 	 */
 	public HorasUsrRegistro(final Usuarios usuario) {
 		/** mudar antes de cerrar */
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 756, 590);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -94,7 +104,9 @@ public class HorasUsrRegistro extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		/** etiquetas **/
+		/*************************************************************************
+		 * Etiquetas de la pantalla                                              *
+		 *************************************************************************/
 		JLabel lblRegistroDeHoras = new JLabel("Registro de Horas Trabajadas");
 		lblRegistroDeHoras.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistroDeHoras.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -105,7 +117,7 @@ public class HorasUsrRegistro extends JFrame {
 		separator.setBounds(279, 42, 100, 2);
 		contentPane.add(separator);
 		
-		final JLabel lblMes = new JLabel(calendario.getMes());
+		final JLabel lblMes = new JLabel(calendario.getNombreMes());
 		lblMes.setForeground(new Color(0, 128, 128));
 		lblMes.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMes.setBounds(491, 87, 148, 20);
@@ -116,7 +128,7 @@ public class HorasUsrRegistro extends JFrame {
 		lblHorasTrabajadas.setBounds(113, 58, 109, 16);
 		contentPane.add(lblHorasTrabajadas);
 		
-		JLabel lblTotalHoras = new JLabel("0");
+		lblTotalHoras = new JLabel("0");
 		lblTotalHoras.setBounds(234, 58, 163, 16);
 		contentPane.add(lblTotalHoras);
 		
@@ -125,7 +137,7 @@ public class HorasUsrRegistro extends JFrame {
 		lblMontoSueldo.setBounds(113, 87, 109, 16);
 		contentPane.add(lblMontoSueldo);
 		
-		JLabel lblValorHoras = new JLabel();
+		lblValorHoras = new JLabel();
 		lblValorHoras.setText(String.valueOf(usuario.getValorHora()));
 		lblValorHoras.setForeground(new Color(0, 128, 128));
 		lblValorHoras.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -137,7 +149,7 @@ public class HorasUsrRegistro extends JFrame {
 		lblSueldoTotal.setBounds(370, 57, 109, 16);
 		contentPane.add(lblSueldoTotal);
 		
-		JLabel lblSueldo = new JLabel("0");
+		lblSueldo = new JLabel("0");
 		lblSueldo.setBounds(491, 58, 148, 16);
 		contentPane.add(lblSueldo);
 		
@@ -161,17 +173,19 @@ public class HorasUsrRegistro extends JFrame {
 		lblSalida.setBounds(195, 144, 46, 14);
 		contentPane.add(lblSalida);
 		
-		JLabel lblNewLabel = new JLabel("Hora Descanso");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(396, 117, 72, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblHoraDescanso = new JLabel("Hora Descanso");
+		lblHoraDescanso.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblHoraDescanso.setBounds(396, 117, 72, 14);
+		contentPane.add(lblHoraDescanso);
 		
 		JLabel lblTotalHorasTrabajadas = new JLabel("Total Horas Trabajadas");
 		lblTotalHorasTrabajadas.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTotalHorasTrabajadas.setBounds(356, 147, 112, 14);
 		contentPane.add(lblTotalHorasTrabajadas);
 		
-		/** Campos del formulario **/
+		/*************************************************************************
+		 * Campos del formulario de registro de horas                            *
+		 *************************************************************************/
 		txtFecha = new JFormattedTextField(formatDate);
 		txtFecha.setBounds(59, 115, 86, 20);
 		contentPane.add(txtFecha);
@@ -217,8 +231,8 @@ public class HorasUsrRegistro extends JFrame {
 		txtHorasDescanso.setColumns(10);
 		
 		txtHorasTrabajadas = new JFormattedTextField(formatHora);
-		txtHorasTrabajadas.setEditable(false);
 		txtHorasTrabajadas.setColumns(10);
+		txtHorasTrabajadas.setEditable(false);
 		txtHorasTrabajadas.setBounds(469, 144, 86, 20);
 		contentPane.add(txtHorasTrabajadas);
 		txtHorasTrabajadas.addFocusListener(new FocusListener() {
@@ -231,9 +245,12 @@ public class HorasUsrRegistro extends JFrame {
 			
 			@Override
 			public void focusGained(FocusEvent arg0) {
-				// TODO Auto-generated method stub
-				Date totalHoras = calendario.getHoursBetweenTimes(txtEntrada.getText(), txtSalida.getText());
-				txtHorasTrabajadas.setValue(totalHoras);
+				String totalHoras = "";
+				if (!txtHorasDescanso.getText().equals("")) {
+					totalHoras = calendario.getSuprimeHoras(txtEntrada.getText(), txtSalida.getText());
+					totalHoras = calendario.getSuprimeHoras(txtHorasDescanso.getText(), totalHoras);
+					txtHorasTrabajadas.setText(totalHoras);
+				}
 			}
 		});
 		
@@ -258,16 +275,23 @@ public class HorasUsrRegistro extends JFrame {
 		btnRegistrar.setIcon(new ImageIcon(HorasUsrRegistro.class.getResource("/imagenes/ic_get_app_black_24dp_2x.png")));
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String fecha = txtFecha.getText();
-				String entrada = txtEntrada.getText();
-				String salida = txtSalida.getText();
+				String fecha     = txtFecha.getText();
+				String entrada   = txtEntrada.getText();
+				String salida    = txtSalida.getText();
 				String horasTrab = txtHorasTrabajadas.getText();
-				String descanso = txtHorasDescanso.getText();
+				String descanso  = txtHorasDescanso.getText();
 				HorasTrabajadas hTrab = new HorasTrabajadas(usuario);
-				if(hTrab.registrar(fecha, entrada, salida, horasTrab, descanso)){
-					JOptionPane.showMessageDialog(null, "Horas registradas con éxito!");
-					scrollPane.remove(tablaHorarios);
-					
+				if (!fecha.equals("") && !entrada.equals("") && !salida.equals("") && !horasTrab.equals("") && !descanso.equals("")) {
+					if (hTrab.registrar(fecha, entrada, salida, horasTrab, descanso)) {
+						JOptionPane.showMessageDialog(null, "Exito! Horario registrado!");
+						contentPane.remove(scrollPane);
+						crearTablaMes(usuario);
+						llenarCampos(usuario);
+					} else {
+						JOptionPane.showMessageDialog(null, "Error! Horario no registrado!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Hay que llenar todo los campos del formulario");
 				}
 			}
 		});
@@ -275,6 +299,8 @@ public class HorasUsrRegistro extends JFrame {
 		contentPane.add(btnRegistrar);
 		
 		crearTablaMes(usuario);
+		// llenar campos
+		llenarCampos(usuario);
 	}
 	
 	public void crearTablaMes(Usuarios usuario) {
@@ -284,7 +310,14 @@ public class HorasUsrRegistro extends JFrame {
 		HorasTrabajadas horasTrab = new HorasTrabajadas(usuario);
 		String[] columnas = {"Fecha", "Entrada", "Salida", "Hora Descanso", "Total Horas Del Día"};
 		Object[][] horarios = horasTrab.getHorariosDelUsuario();
-		tablaHorarios = new JTable();
+
+		tablaHorarios = new JTable(){
+			private static final long serialVersionUID = 1L;
+			// impedir que sea editable
+			public boolean isCellEditable(int row, int column) {                
+                return false;               
+			};
+		};
 		tablaHorarios.setFillsViewportHeight(true);
 		tablaHorarios.setBounds(10, 31, 444, 340);
 		tablaHorarios.setModel(new DefaultTableModel(horarios, columnas));
@@ -294,5 +327,13 @@ public class HorasUsrRegistro extends JFrame {
 		contentPane.add(scrollPane);
 		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtFecha, txtEntrada, txtSalida, txtHorasDescanso, txtHorasTrabajadas, btnRegistrar}));
 		
+	}
+	
+	public void llenarCampos(Usuarios usuario) {
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:MM");
+		HorasTrabajadas horasTrab = new HorasTrabajadas(usuario);
+		String total = horasTrab.getTotalHoras();
+		lblTotalHoras.setText(total);
+		lblSueldo.setText(String.valueOf(horasTrab.calcularHonorarios(usuario.getValorHora())));
 	}
 }

@@ -1,22 +1,27 @@
 package com.ght.classes;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class Calendario {
 	private String meses[];
 	static Calendar calendar;
 	public static final int HOUR_OF_DAY = calendar.HOUR_OF_DAY;
 	
+	private SimpleDateFormat formatter;
+	
 	public Calendario() {
 		calendar = Calendar.getInstance();
 		meses = new String[] {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"};
 	}
 	
-	public String getMes(){
+	public String getNombreMes(){
 		return meses[calendar.get(calendar.MONTH)];
 	}
 	
@@ -32,9 +37,15 @@ public class Calendario {
 	}
 	
 	public String getFechaActual() {
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY");
+		formatter = new SimpleDateFormat("YYYY-MM-dd");
 		calendar = Calendar.getInstance();
-		return format.format(calendar.getTime());
+		return formatter.format(calendar.getTime());
+	}
+	
+	public String getMesActual() {
+		formatter = new SimpleDateFormat("YYYY-MM");
+		calendar = Calendar.getInstance();
+		return formatter.format(calendar.getTime());
 	}
 
 	public void setTime(Date hora) {
@@ -49,18 +60,41 @@ public class Calendario {
 		return calendar.getTime();
 	}
 
-	public Date getHoursBetweenTimes(String value, String value2) {
+	public String getSuprimeHoras(String value, String value2) {
 		try {
-			SimpleDateFormat format = new SimpleDateFormat("HH:MM");
-			Date hora  = format.parse(value);
-			Date hora2 = format.parse(value);
-			long diference = hora.getTime() + hora2.getTime();
-			return format.parse(String.valueOf(diference));
-		} catch (ParseException e) {
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+			format.setTimeZone(TimeZone.getTimeZone("GMT"));
+			
+			long minutos  = getMinutos(value, format);
+			long minutos2 = getMinutos(value2, format);
+			long diference = (minutos2 - minutos)*60*1000;
+			Date fecha = new Date(diference);
+			return format.format(fecha);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
+	public long getMinutos(String hora, SimpleDateFormat format) {
+		Date data;
+		try {
+			data = format.parse(hora);
+		} catch (Exception e) {
+			return 0;
+		}
+		long minutos = data.getTime()/1000/60;
+		return minutos;
+	}
+	
+	public void clear() {
+		// TODO Auto-generated method stub
+		calendar.clear();
+	}
+
+	public long getTiempoEnMilisegundos() {
+		// TODO Auto-generated method stub
+		return calendar.getTimeInMillis();
+	}
 }

@@ -57,7 +57,7 @@ public class ListAdmUsuario extends JFrame {
 	 */
 	public ListAdmUsuario() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 703, 409);
+		setBounds(100, 100, 703, 542);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -130,7 +130,7 @@ public class ListAdmUsuario extends JFrame {
 		btnExcluir.setBorder(null);
 		btnExcluir.setBorderPainted(false);
 		btnExcluir.setContentAreaFilled(false);
-		btnExcluir.setIcon(new ImageIcon(ListAdmUsuario.class.getResource("/imagenes/eraser.png")));
+		btnExcluir.setIcon(new ImageIcon(ListAdmUsuario.class.getResource("/imagenes/ic_delete_black_24dp_2x.png")));
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Usuarios usuario = new Usuarios();
@@ -144,7 +144,7 @@ public class ListAdmUsuario extends JFrame {
 				}
 			}
 		});
-		btnExcluir.setBounds(36, 95, 24, 24);
+		btnExcluir.setBounds(65, 96, 55, 49);
 		contentPane.add(btnExcluir);
 		
 		JButton btnEditar = new JButton("");
@@ -154,13 +154,13 @@ public class ListAdmUsuario extends JFrame {
 				pantEdtUsuario.setVisible(true);
 			}
 		});
-		btnEditar.setIcon(new ImageIcon(ListAdmUsuario.class.getResource("/imagenes/edit.png")));
+		btnEditar.setIcon(new ImageIcon(ListAdmUsuario.class.getResource("/imagenes/ic_person_add_black_24dp_2x.png")));
 		btnEditar.setToolTipText("Editar Usuario");
 		btnEditar.setOpaque(false);
 		btnEditar.setContentAreaFilled(false);
 		btnEditar.setBorderPainted(false);
 		btnEditar.setBorder(null);
-		btnEditar.setBounds(7, 95, 24, 24);
+		btnEditar.setBounds(4, 96, 49, 49);
 		contentPane.add(btnEditar);
 		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNombre, txtLogin, cbxTipo, btnBuscar}));
 	}
@@ -183,7 +183,7 @@ public class ListAdmUsuario extends JFrame {
 		table.getColumnModel().getColumn(3).setPreferredWidth(200);
 		sclUsuarios = new JScrollPane(table);
 		sclUsuarios.setViewportBorder(UIManager.getBorder("ScrollPane.border"));
-		sclUsuarios.setBounds(0, 117, 685, 245);
+		sclUsuarios.setBounds(0, 144, 685, 351);
 		contentPane.add(sclUsuarios);
 	}
 }
