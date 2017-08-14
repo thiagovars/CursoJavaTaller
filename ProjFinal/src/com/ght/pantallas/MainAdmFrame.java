@@ -46,25 +46,19 @@ public class MainAdmFrame extends JFrame {
 		
 		JMenuBar menu = new JMenuBar();
 		
-		JMenu archivo         = new JMenu("File");
-		JMenu cadastro        = new JMenu("Cadastro");
+		JMenu archivo         = new JMenu("Archivo");
+		JMenu cadastro        = new JMenu("Registro de usuarios");
 		JMenu configuraciones = new JMenu("Configuraciones");
-		JMenu controlMensual  = new JMenu("Control Mensual");
 		
 		JMenuItem logout = new JMenuItem("Cambiar Utilizador");
 		JMenuItem salir  = new JMenuItem("Cerrar Aplicacion");
 		
 		JMenuItem nuevoUsr     = new JMenuItem("Nuevo Usuario");
-		JMenuItem listUsuarios = new JMenuItem("Listar Usuarios");
+		JMenuItem listUsuarios = new JMenuItem("Listado de Usuarios");
 		
-		JMenuItem nuevaCategoria = new JMenuItem("Nueva Categoria");
-		JMenuItem editaCategoria = new JMenuItem("Editar Categoria");
-		JMenuItem excluCategoria = new JMenuItem("Excluir Categoria");
+		JMenuItem categorias = new JMenuItem("Categorias de utilizador");
 		JMenuItem sueldo         = new JMenuItem("Sueldo de Los Usuarios");
 		JMenuItem perfiles       = new JMenuItem("Perfiles Usuarios");
-		
-		JMenuItem cierreMensual  = new JMenuItem("Cierre del Mes");
-		JMenuItem pasadoMensual  = new JMenuItem("Cierres Pasados");
 		
 		archivo.add(logout);
 		archivo.add(salir);
@@ -72,19 +66,13 @@ public class MainAdmFrame extends JFrame {
 		cadastro.add(nuevoUsr);
 		cadastro.add(listUsuarios);
 		
-		configuraciones.add(nuevaCategoria);
-		configuraciones.add(editaCategoria);
-		configuraciones.add(excluCategoria);
+		configuraciones.add(categorias);
 		configuraciones.add(sueldo);
 		configuraciones.add(perfiles);
-		
-		controlMensual.add(cierreMensual);
-		controlMensual.add(pasadoMensual);
 		
 		menu.add(archivo);
 		menu.add(cadastro);
 		menu.add(configuraciones);
-		menu.add(controlMensual);
 		
 		setJMenuBar(menu);
 		
@@ -118,7 +106,7 @@ public class MainAdmFrame extends JFrame {
 		});
 		
 		/**
-		 * Aciòn de los menus del CADASTRO
+		 * Aciòn de los menus de registro
 		 */
 		nuevoUsr.addActionListener(new ActionListener() {
 			
@@ -141,31 +129,13 @@ public class MainAdmFrame extends JFrame {
 		/**
 		 * Ación de los menus de las CATEGORIAS
 		 */
-		nuevaCategoria.addActionListener(new ActionListener() {
+		categorias.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				IncAdmCategoria pantIncCategoria = new IncAdmCategoria();
 				pantIncCategoria.setVisible(true);
-			}
-		});
-		editaCategoria.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				EdtAdmCategoria pantEdtCategoria = new EdtAdmCategoria();
-				pantEdtCategoria.setVisible(true);
-			}
-		});
-		excluCategoria.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				ExclAdmCategoria pantExclCategoria = new ExclAdmCategoria();
-				pantExclCategoria.setVisible(true);
 			}
 		});
 		sueldo.addActionListener(new ActionListener() {
@@ -185,27 +155,6 @@ public class MainAdmFrame extends JFrame {
 				// TODO Auto-generated method stub
 				PerfileAdmCategoria pantPerfileCategoria = new PerfileAdmCategoria();
 				pantPerfileCategoria.setVisible(true);
-			}
-		});
-		/**
-		 * Ación del menu CONTROL MENSUAL
-		 */
-		cierreMensual.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				CierreAdmControlMensual pantCierreControlMensual = new CierreAdmControlMensual();
-				pantCierreControlMensual.setVisible(true);
-			}
-		});
-		pasadoMensual.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				PasadoAdmControlMensual pantPstCtrlMensual = new PasadoAdmControlMensual();
-				pantPstCtrlMensual.setVisible(true);
 			}
 		});
 	}

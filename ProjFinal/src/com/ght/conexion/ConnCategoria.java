@@ -70,4 +70,54 @@ public class ConnCategoria {
 		}
 		return 0;
 	}
+	
+	public ResultSet getTipoCategorias() {
+		String query = "SELECT tipo FROM CATEGORIA";
+		try {
+			ResultSet result = conn.buscar(query);
+			return result;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
+	public Object[][] getListadoCategorias(String busqueda) {
+		int registros = 0;
+		String queryUsrs = "SELECT codigo, nombre, tipo, valorHora FROM categoria";
+		if(!busqueda.equals("")) {
+			queryUsrs += " WHERE " + busqueda;
+		} else {
+			queryUsrs += " WHERE codigo > 0";
+		}
+		String totalRegistros = "SELECT count(*) as cantidad FROM categoria";
+		if(!busqueda.equals("")) {
+			totalRegistros += " WHERE " + busqueda;
+		}
+		try {
+			ResultSet result = conn.buscar(totalRegistros);
+			result.next();
+			registros = result.getInt("cantidad");
+			result.close();
+		} catch (Exception e) {
+			System.out.println("No se ha podido recuperar registros: " + e);
+		}
+		
+		Object[][] categorias = new String[registros][4];
+		try {
+			ResultSet result = conn.buscar(queryUsrs);
+			int indice = 0;
+			while (result.next()) {
+				categorias[indice][0] = result.getString("codigo");
+				categorias[indice][1] = result.getString("nombre");
+				categorias[indice][2] = result.getString("tipo");
+				categorias[indice][3] = result.getString("valorHora");
+				indice++;
+			}
+			result.close();
+		} catch (Exception e) {
+			System.out.println("Imposible recuperar registros de categoria: "+e);
+		}
+		return categorias;
+	}
 }

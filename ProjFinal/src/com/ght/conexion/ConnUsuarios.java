@@ -25,7 +25,7 @@ public class ConnUsuarios extends ConnDAO {
 			result.close();
 			return retorno;
 		} catch (Exception e) {
-			System.out.println("No se ha podido validar usuario: " + e);
+			System.out.println("Error al validar usuario: " + e);
 		}
 		return retorno;
 	}
@@ -50,7 +50,7 @@ public class ConnUsuarios extends ConnDAO {
 		try {
 			return this.conn.insere(query);
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Error al guardar usuario: " + e);
 		}
 		return false;
 	}
@@ -71,7 +71,7 @@ public class ConnUsuarios extends ConnDAO {
 		try {
 			return this.conn.insere(query);
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Error al actualizar usuario: " + e);
 		}
 		return false;
 	}

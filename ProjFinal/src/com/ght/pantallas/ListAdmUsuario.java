@@ -67,7 +67,7 @@ public class ListAdmUsuario extends JFrame {
 		 * Titulo de la pantalla
 		 */
 		setTitle("GHT - Listado de usuarios");
-		listarUsuarios();
+		levantarListadoUsuarios();
 		
 		JLabel lblListadoDeUsuarios = new JLabel("Listado de usuarios");
 		lblListadoDeUsuarios.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -118,7 +118,7 @@ public class ListAdmUsuario extends JFrame {
 					busqueda[2] = String.valueOf(cbxTipo.getSelectedItem());
 				}
 				contentPane.remove(sclUsuarios);
-				listarUsuarios();
+				levantarListadoUsuarios();
 			}
 		});
 		btnBuscar.setBounds(488, 60, 84, 25);
@@ -138,7 +138,7 @@ public class ListAdmUsuario extends JFrame {
 				if(usuario.excluir(codigo) && !codigo.equals("")) {
 					JOptionPane.showMessageDialog(null, "Usuario excluir con exito");
 					contentPane.remove(sclUsuarios);
-					listarUsuarios();
+					levantarListadoUsuarios();
 				} else {
 					JOptionPane.showMessageDialog(null, "No fue posible excluir usuario");
 				}
@@ -165,7 +165,7 @@ public class ListAdmUsuario extends JFrame {
 		contentPane.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtNombre, txtLogin, cbxTipo, btnBuscar}));
 	}
 	
-	public void listarUsuarios() {
+	public void levantarListadoUsuarios() {
 		String[] column = {"codigo", "nombre", "login", "Categoria"};
 		Usuarios usuarios = new Usuarios();
 		Object[][] usrs = usuarios.getListadoUsuarios(busqueda);

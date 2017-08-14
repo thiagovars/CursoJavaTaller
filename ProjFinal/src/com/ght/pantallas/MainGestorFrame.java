@@ -2,11 +2,14 @@ package com.ght.pantallas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -53,19 +56,72 @@ public class MainGestorFrame extends JFrame {
 		JMenuItem logout = new JMenuItem("Cambiar Utilizador");
 		JMenuItem salir  = new JMenuItem("Cerrar Aplicación");
 		
-		JMenuItem hora = new JMenuItem("Aprobar horas");
+		JMenuItem cierreDelMes = new JMenuItem("Cierre del mes");
 		JMenuItem relatorios = new JMenuItem("Relatorios");
 		
 		archivo.add(logout);
 		archivo.add(salir);
 		
-		aciones.add(hora);
+		aciones.add(cierreDelMes);
 		aciones.add(relatorios);
 		
 		menu.add(archivo);
 		menu.add(aciones);
 		
 		setJMenuBar(menu);
+		
+		/**
+		 * Ación de los menus del ARCHIVO
+		 */
+		logout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int option = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres quitar la sesiòn?", "", JOptionPane.YES_NO_OPTION);
+				if(option == JOptionPane.YES_OPTION) {
+					IniciarSession login = new IniciarSession();
+					login.setVisible(true);
+					dispose();
+				}
+			}
+		});
+		
+		salir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int option = JOptionPane.showConfirmDialog(null, "¿Cerrar la aplicaciòn?", "Eligir", JOptionPane.YES_NO_OPTION);
+				if(option == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
+		
+		/**
+		 * Apertura de la pantalla para controlar las horas del mes
+		 * de cada funcionario
+		 */
+		cierreDelMes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CierreGestMes pantCierreMes = new CierreGestMes();
+				pantCierreMes.setVisible(true);
+			}
+		});
+		
+		relatorios.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				RelatorioGestHoras pantRelHoras = new RelatorioGestHoras();
+				pantRelHoras.setVisible(true);
+			}
+		});
+		
+		
 	}
 
 }
